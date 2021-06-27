@@ -1,0 +1,8 @@
+.idea
+.vscode
+.mvn
+.metadata
+mvnw.cmd
+HELP.md
+app/node_modules
+src/main/resources/application.properties
