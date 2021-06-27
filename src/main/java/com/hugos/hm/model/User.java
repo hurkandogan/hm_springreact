@@ -1,30 +1,37 @@
 package com.hugos.hm.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name="users",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = "mail")
+        })
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
     private String mail;
     private String password;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "roles",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+
     public User() {}
 
-    public User(Long id) {
-        this.id = id;
-    }
-
-    public User(String mail) {
+    public User(String mail, String password) {
         this.mail = mail;
+        this.password = password;
     }
 
     public Long getId() {
@@ -65,5 +72,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

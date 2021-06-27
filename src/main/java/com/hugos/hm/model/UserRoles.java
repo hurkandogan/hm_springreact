@@ -1,4 +1,4 @@
-package com.hugos.hm.security;
+package com.hugos.hm.model;
 
 public enum UserRoles {
     SUPERADMIN,
