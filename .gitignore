@@ -1,8 +1,18 @@
+#IDE
 .idea
 .vscode
+
+#Project & Maven
 .mvn
 .metadata
+api
+
+#Security
+src/main/resources/application.properties
+
+#Frontend
+app/node_modules
+
+#Misc
 mvnw.cmd
 HELP.md
-app/node_modules
-src/main/resources/application.properties
