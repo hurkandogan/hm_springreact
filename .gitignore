@@ -39,6 +39,7 @@ src/main/resources/application.properties
 
 #Frontend
 app/node
+app/node/*
 app/node_modules
 mvnw.cmd
 mvnw
