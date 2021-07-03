@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+.metadata
+.mvn
 
 ### STS ###
 .apt_generated
@@ -37,3 +39,5 @@ src/main/resources/application.properties
 
 #Frontend
 app/node_modules
+mvnw.cmd
+mvnw
