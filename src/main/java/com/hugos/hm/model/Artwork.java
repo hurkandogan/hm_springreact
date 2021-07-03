@@ -12,17 +12,20 @@ public class Artwork {
     @Id
     @GeneratedValue
     private Long id;
-    private String artist;
-    private Date dataOfPurchase;
+    private String artistName;
+    private Date purchaseDate;
     private String description;
-    private boolean framing;
+    private String location;
+    private double framing;
     private String imageLink;
-    private String locationOfPurchase;
-    private String name;
+    private String purchaseLocation;
+    private String artworkName;
     private double price;
-    private String size;
-    private double tax;
-    private double transport;
+    private String sizes;
+    private double taxPrice;
+    private double transportPrice;
+    private boolean arr;
+    private String notes;
 
     public Artwork() {}
 
@@ -38,20 +41,20 @@ public class Artwork {
         this.id = id;
     }
 
-    public String getArtist() {
-        return artist;
+    public String getArtistName() {
+        return artistName;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
-    public Date getDataOfPurchase() {
-        return dataOfPurchase;
+    public Date getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setDataOfPurchase(Date dataOfPurchase) {
-        this.dataOfPurchase = dataOfPurchase;
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
     public String getDescription() {
@@ -62,11 +65,19 @@ public class Artwork {
         this.description = description;
     }
 
-    public boolean isFraming() {
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public double getFraming() {
         return framing;
     }
 
-    public void setFraming(boolean framing) {
+    public void setFraming(double framing) {
         this.framing = framing;
     }
 
@@ -78,20 +89,20 @@ public class Artwork {
         this.imageLink = imageLink;
     }
 
-    public String getLocationOfPurchase() {
-        return locationOfPurchase;
+    public String getPurchaseLocation() {
+        return purchaseLocation;
     }
 
-    public void setLocationOfPurchase(String locationOfPurchase) {
-        this.locationOfPurchase = locationOfPurchase;
+    public void setPurchaseLocation(String purchaseLocation) {
+        this.purchaseLocation = purchaseLocation;
     }
 
-    public String getName() {
-        return name;
+    public String getArtworkName() {
+        return artworkName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArtworkName(String artworkName) {
+        this.artworkName = artworkName;
     }
 
     public double getPrice() {
@@ -102,27 +113,43 @@ public class Artwork {
         this.price = price;
     }
 
-    public String getSize() {
-        return size;
+    public String getSizes() {
+        return sizes;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
     }
 
-    public double getTax() {
-        return tax;
+    public double getTaxPrice() {
+        return taxPrice;
     }
 
-    public void setTax(double tax) {
-        this.tax = tax;
+    public void setTaxPrice(double taxPrice) {
+        this.taxPrice = taxPrice;
     }
 
-    public double getTransport() {
-        return transport;
+    public double getTransportPrice() {
+        return transportPrice;
     }
 
-    public void setTransport(double transport) {
-        this.transport = transport;
+    public void setTransportPrice(double transportPrice) {
+        this.transportPrice = transportPrice;
+    }
+
+    public boolean isArr() {
+        return arr;
+    }
+
+    public void setArr(boolean arr) {
+        this.arr = arr;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

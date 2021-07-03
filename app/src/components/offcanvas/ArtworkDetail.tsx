@@ -43,25 +43,25 @@ const ArtworkDetail = (props) => {
                         hidden />
                 <div className="row mt-3">
                     <div className="col">
-                        <label htmlFor="artwork_name">Artwork Name</label>
+                        <label htmlFor="artworkName">Artwork Name</label>
                         <input type="text"
                             className="form-control"
-                            name="artwork_name"
-                            id="artwork_name"
+                            name="artworkName"
+                            id="artworkName"
                             placeholder="Artwork Name"
                             autoComplete="off"
-                            value={props.selectedArtwork.artwork_name ?? ""}
+                            value={props.selectedArtwork.artworkName ?? ""}
                             onChange={props.editSelectedArtworkHandler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="artist_name">Artist Name</label>
+                        <label htmlFor="artistName">Artist Name</label>
                         <input type="text"
                             className="form-control"
-                            name="artist_name"
-                            id="artist_name"
+                            name="artistName"
+                            id="artistName"
                             placeholder="Artist Name"
                             autoComplete="off"
-                                value={props.selectedArtwork.artist_name ?? ""}
+                                value={props.selectedArtwork.artistName ?? ""}
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                 </div>
@@ -91,25 +91,25 @@ const ArtworkDetail = (props) => {
                 </div>
                 <div className="row mt-3">
                     <div className="col">
-                        <label htmlFor="purchase_date">Purchase Date</label>
+                        <label htmlFor="purchaseDate">Purchase Date</label>
                         <input type="date"
                             className="form-control"
-                            name="purchase_date"
-                            id="purchase_date"
+                            name="purchaseDate"
+                            id="purchaseDate"
                             placeholder="Purchase Date"
                             autoComplete="off"
-                                value={props.selectedArtwork.purchase_date ?? ""}
+                                value={props.selectedArtwork.purchaseDate ?? ""}
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="purchase_location">Location of purchase</label>
+                        <label htmlFor="purchaseLocation">Location of purchase</label>
                         <input type="text"
                             className="form-control"
-                            name="purchase_location"
-                            id="purchase_location"
+                            name="purchaseLocation"
+                            id="purchaseLocation"
                             placeholder="Location of purchase"
                             autoComplete="off"
-                                value={props.selectedArtwork.purchase_location ?? ""}
+                                value={props.selectedArtwork.purchaseLocation ?? ""}
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                 </div>
@@ -126,25 +126,25 @@ const ArtworkDetail = (props) => {
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="tax_price">Tax Cost</label>
+                        <label htmlFor="taxPrice">Tax Cost</label>
                         <input type="text"
                             className="form-control"
-                            name="tax_price"
-                            id="tax_price"
+                            name="taxPrice"
+                            id="taxPrice"
                             placeholder="Tax"
                             autoComplete="off" 
-                                value={props.selectedArtwork.tax_price ?? ""}
+                                value={props.selectedArtwork.taxPrice ?? ""}
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="transport_price">Transport Cost</label>
+                        <label htmlFor="transportPrice">Transport Cost</label>
                         <input type="text"
                             className="form-control"
-                            name="transport_price"
-                            id="transport_price"
+                            name="transportPrice"
+                            id="transportPrice"
                             placeholder="Transport"
                             autoComplete="off"
-                                value={props.selectedArtwork.transport_price ?? ""}
+                                value={props.selectedArtwork.transportPrice ?? ""}
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                 </div>
@@ -169,18 +169,18 @@ const ArtworkDetail = (props) => {
                             autoComplete="off"
                                 value={props.selectedArtwork.arr ?? ""}
                                 onChange={props.editSelectedArtworkHandler}>
-                                <option value={0}>No</option>
-                                <option value={1}>Yes</option>
+                                <option value={'false'}>No</option>
+                                <option value={'true'}>Yes</option>
                             </select>
                     </div>
                 </div>
                 <div className="row mt-3">
                     <div className="col">
-                        <label htmlFor="artwork_desc">Artwork Description</label>
+                        <label htmlFor="description">Artwork Description</label>
                         <textarea className="form-control"
-                            name="artwork_desc"
-                            id="artwork_desc"
-                                value={props.selectedArtwork.artwork_desc ?? ""}
+                            name="description"
+                            id="description"
+                                value={props.selectedArtwork.description ?? ""}
                                 onChange={props.editSelectedArtworkHandler} />
                     </div>
                     <div className="col">
@@ -204,15 +204,15 @@ const ArtworkDetail = (props) => {
             ) : (
                 <div>
             <div className="container">
-            <img src="https://picsum.photos/100/100" alt={props.selectedArtwork.artwork_name ?? ""} />
+            <img src="https://picsum.photos/100/100" alt={props.selectedArtwork.artworkName ?? ""} />
             <div className="row mt-3">
                 <div className="col">
                     <h5>Artwork Name:</h5>
-                        <p className="detail-text">{ props.selectedArtwork.artwork_name ?? ""}</p>
+                        <p className="detail-text">{ props.selectedArtwork.artworkName ?? ""}</p>
                 </div>
                 <div className="col">
                     <h5>Artist Name:</h5>
-                    <p className="detail-text">{props.selectedArtwork.artist_name ?? ""}</p>
+                    <p className="detail-text">{props.selectedArtwork.artistName ?? ""}</p>
                 </div>
             </div>
             <div className="row mt-3">
@@ -228,11 +228,11 @@ const ArtworkDetail = (props) => {
             <div className="row mt-3">
                 <div className="col">
                     <h5>Purchase Date:</h5>
-                    <p className="detail-text">{props.selectedArtwork.purchase_date ?? ""}</p>
+                    <p className="detail-text">{props.selectedArtwork.purchaseDate ?? ""}</p>
                 </div>
                 <div className="col">
                     <h5>Purchase Date:</h5>
-                    <p className="detail-text">{props.selectedArtwork.purchase_location ?? ""}</p>
+                    <p className="detail-text">{props.selectedArtwork.purchaseLocation ?? ""}</p>
                 </div>
             </div>
             <div className="row mt-3">
@@ -246,7 +246,7 @@ const ArtworkDetail = (props) => {
                 </div>
                 <div className="col">
                     <h5>Transport Cost:</h5>
-                        <p className="detail-text">{props.selectedArtwork.transport_price ?? 0.00}</p>
+                        <p className="detail-text">{props.selectedArtwork.transportPrice ?? 0.00}</p>
                 </div>
             </div>
             <div className="row mt-3">
@@ -262,7 +262,7 @@ const ArtworkDetail = (props) => {
             <div className="row mt-3">
                 <div className="col">
                     <h5>Artwork Description:</h5>
-                    <p className="detail-text">{props.selectedArtwork.artwork_desc ?? 0.00}</p>
+                    <p className="detail-text">{props.selectedArtwork.description ?? 0.00}</p>
                 </div>
                 <div className="col">
                     <h5>Notes:</h5>

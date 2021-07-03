@@ -11,7 +11,6 @@ import authService from '../../connection/auth.service';
 const Artwork = () => {
 
     const [artworks, setArtworks] = useState<any[]>([]);
-    const [artworkCount, setArtworkCount] = useState(0);
     const [loading, setLoading] = useState(false);
     const [offCanvasToggle, setOffCanvasToggle] = useState(false);
     const [offCanvasArtworkDetailToggle, setOffCanvasArtworkDetailToggle] = useState(false);
@@ -19,7 +18,6 @@ const Artwork = () => {
 
     useEffect(() => {
         setLoading(true);
-        console.log(api.get('api/artwork'));
         api.get('/api/artwork')
             .then(response => {
                 if (response.status === 401) {
@@ -27,8 +25,7 @@ const Artwork = () => {
                     window.location.reload();
                 }
                 console.log(response);
-                setArtworks(response.data.payload.rows);
-                setArtworkCount(response.data.payload.count);
+                setArtworks(response.data);
             })
             .catch(err => console.log(err));
         setLoading(false);
@@ -74,7 +71,7 @@ const Artwork = () => {
                     <div className="row justify-content-between mb-3">
                         <div className="col-6">
                             <h1>Artwork</h1>
-                            <small>In Kai's Inventory there are {artworkCount} piece(s).</small>
+                            <small>In Kai's Inventory there are {artworks.length} piece(s).</small>
                         </div>
                         <div className="col-6 btn-container">
                             <button className="btn btn-primary" disabled={true}>
@@ -107,8 +104,8 @@ const Artwork = () => {
                                 return (
                                         <tr key={el.id} onMouseUp={() => offCanvasArtworkDetailHandler(el)}>
                                         <th scope="row"><img src="https://picsum.photos/50/50" alt={el.artwork_name} /></th>
-                                        <td>{el.artwork_name}</td>
-                                        <td>{el.artist_name}</td>
+                                        <td>{el.artworkName}</td>
+                                        <td>{el.artistName}</td>
                                         <td>{el.location}</td>
                                         <td>{el.price} €</td>
                                     </tr>

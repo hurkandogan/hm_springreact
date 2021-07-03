@@ -6,18 +6,18 @@ import { slide as Menu } from 'react-burger-menu';
 const InsertArtwork = (props) => {
 
     const ARTWORK_INITIAL_VALUE = {
-        artwork_name: "",
-        artist_name: "",
+        artworkName: "",
+        artistName: "",
         sizes: "",
         location: "",
-        purchase_date: "",
-        purchase_location: "",
+        purchaseDate: "",
+        purchaseLocation: "",
         price: "",
-        tax_price: "",
-        transport_price: "",
+        taxPrice: "",
+        transportPrice: "",
         arr: 0,
         framing: "",
-        artwork_desc: "",
+        description: "",
         notes:"",
     };
 
@@ -51,25 +51,25 @@ const InsertArtwork = (props) => {
             <form onSubmit={submitArtwork}>
                 <div className="row mt-3">
                     <div className="col">
-                        <label htmlFor="artwork_name">Artwork Name</label>
+                        <label htmlFor="artworkName">Artwork Name</label>
                         <input type="text"
                             className="form-control"
-                            name="artwork_name"
-                            id="artwork_name"
+                            name="artworkName"
+                            id="artworkName"
                             placeholder="Artwork Name"
                             autoComplete="off"
-                            value={artwork.artwork_name}
+                            value={artwork.artworkName}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="artist_name">Artist Name</label>
+                        <label htmlFor="artistName">Artist Name</label>
                         <input type="text"
                             className="form-control"
-                            name="artist_name"
-                            id="artist_name"
+                            name="artistName"
+                            id="artistName"
                             placeholder="Artist Name"
                             autoComplete="off"
-                            value={artwork.artist_name}
+                            value={artwork.artistName}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -99,25 +99,25 @@ const InsertArtwork = (props) => {
                 </div>
                 <div className="row mt-3">
                     <div className="col">
-                        <label htmlFor="purchase_date">Purchase Date</label>
+                        <label htmlFor="purchaseDate">Purchase Date</label>
                         <input type="date"
                             className="form-control"
-                            name="purchase_date"
-                            id="purchase_date"
+                            name="purchaseDate"
+                            id="purchaseDate"
                             placeholder="Purchase Date"
                             autoComplete="off"
-                            value={artwork.purchase_date}
+                            value={artwork.purchaseDate}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="purchase_location">Location of purchase</label>
+                        <label htmlFor="purchaseLocation">Location of purchase</label>
                         <input type="text"
                             className="form-control"
-                            name="purchase_location"
-                            id="purchase_location"
+                            name="purchaseLocation"
+                            id="purchaseLocation"
                             placeholder="Location of purchase"
                             autoComplete="off"
-                            value={artwork.purchase_location}
+                            value={artwork.purchaseLocation}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -134,25 +134,25 @@ const InsertArtwork = (props) => {
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="tax_price">Tax Cost</label>
+                        <label htmlFor="taxPrice">Tax Cost</label>
                         <input type="text"
                             className="form-control"
-                            name="tax_price"
-                            id="tax_price"
+                            name="taxPrice"
+                            id="taxPrice"
                             placeholder="Tax"
                             autoComplete="off"
-                            value={artwork.tax_price}
+                            value={artwork.taxPrice}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">
-                        <label htmlFor="transport_price">Transport Cost</label>
+                        <label htmlFor="transportPrice">Transport Cost</label>
                         <input type="text"
                             className="form-control"
-                            name="transport_price"
-                            id="transport_price"
+                            name="transportPrice"
+                            id="transportPrice"
                             placeholder="Transport Cost"
                             autoComplete="off"
-                            value={artwork.transport_price}
+                            value={artwork.transportPrice}
                             onChange={changeHanler} />
                     </div>
                 </div>
@@ -177,18 +177,18 @@ const InsertArtwork = (props) => {
                             autoComplete="off"
                             value={artwork.arr}
                             onChange={changeHanler}>
-                            <option value={0}>No</option>
-                            <option value={1}>Yes</option>
+                            <option value={'false'}>No</option>
+                            <option value={'true'}>Yes</option>
                         </select>
                     </div>
                 </div>
                 <div className="row mt-3">
                     <div className="col">
-                        <label htmlFor="artwork_desc">Artwork Description</label>
+                        <label htmlFor="description">Artwork Description</label>
                         <textarea className="form-control"
-                            name="artwork_desc"
-                            id="artwork_desc"
-                            value={artwork.artwork_desc}
+                            name="description"
+                            id="description"
+                            value={artwork.description}
                             onChange={changeHanler} />
                     </div>
                     <div className="col">

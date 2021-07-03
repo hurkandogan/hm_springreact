@@ -2,33 +2,48 @@ package com.hugos.hm.controller;
 
 import com.hugos.hm.model.Artwork;
 import com.hugos.hm.repository.ArtworkRepo;
+import com.hugos.hm.services.ArtworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class ArtworkController {
 
-    private final ArtworkRepo artworkRepo;
+    private final ArtworkService artworkService;
 
     @Autowired
-    public ArtworkController(ArtworkRepo artworkRepo) {
-        this.artworkRepo = artworkRepo;
+    public ArtworkController(ArtworkService artworkService) {
+        this.artworkService = artworkService;
     }
 
     @GetMapping("/artwork")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN', 'USER')")
-    Collection<Artwork> all(){
-        return artworkRepo.findAll();
+    List<Artwork> all(){
+        return artworkService.getAllArtworks();
+    }
+    @GetMapping("/artwork/{artworkId}")
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN', 'USER')")
+    Optional<Artwork> getOne(@PathVariable("artworkId") Long id){
+        return artworkService.getOneArtwork(id);
     }
 
-    //@GetMapping("/artwork/{id}")
+    @PostMapping("/artwork")
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
+    public void insert(@RequestBody Artwork artwork){
+        artworkService.insertArtwork(artwork);
+    }
+
+    @PutMapping("/artwork")
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
+    public void update(@RequestBody Artwork artwork){
+        artworkService.insertArtwork(artwork);
+    }
 
 
-    //TODO: POST, UPDATE, PUT, DELETE
+    //TODO: DELETE
 }
