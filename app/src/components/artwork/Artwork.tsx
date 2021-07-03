@@ -19,6 +19,7 @@ const Artwork = () => {
 
     useEffect(() => {
         setLoading(true);
+        console.log(api.get('api/artwork'));
         api.get('/api/artwork')
             .then(response => {
                 if (response.status === 401) {

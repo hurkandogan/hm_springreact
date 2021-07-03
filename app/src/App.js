@@ -27,15 +27,14 @@ function App() {
     
     useEffect(() => {
         getUser();
-        //dispatch(userLogin({ mail: "dogan.hurkan@gmail.com", password: "admin" }));
         console.log(loggedUser);
     }, [])
 
     return (
         <Router>
             <div>
-                { loggedUser.accessToken && <TopNav /> }
-                { loggedUser.accessToken && < Sidebar /> }
+                { loggedUser.token && <TopNav /> }
+                { loggedUser.token && < Sidebar /> }
                 
                 <div className="switch-wrapper">
                     <Switch>

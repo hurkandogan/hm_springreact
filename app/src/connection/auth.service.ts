@@ -10,12 +10,16 @@ const register = (firstName, lastName, mail, password) => {
 };
 
 const signin = (data) => {
-    return api.post("/api/signin", data)
+    return api.post("/login", data)
         .then((response) => {
-            if (response.data.accessToken) {
-                localStorage.setItem("user", JSON.stringify(response.data));
+            if (response.headers.authorization) {
+                const user = {
+                    firstName: response.headers.firstname,
+                    lastName: response.headers.lastname,
+                    token: response.headers.authorization
+                }
+                localStorage.setItem("user", JSON.stringify(user));
             }
-            return response.data;
         })
         .catch(err => console.log(err));
 };

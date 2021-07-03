@@ -30,6 +30,8 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                 new ApplicationUser(
                         "dogandogukan@icloud.com",
                         passwordEncoder.encode("admin"),
+                        "Dogukan",
+                        "Dogan",
                         SUPERADMIN.getGrantedAuthorities(),
                         true,
                         true,
@@ -39,6 +41,8 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
                 new ApplicationUser(
                         "dogan.hurkan@gmail.com",
                         passwordEncoder.encode("admin"),
+                        "Hürkan",
+                        "Dogan",
                         SUPERADMIN.getGrantedAuthorities(),
                         true,
                         true,

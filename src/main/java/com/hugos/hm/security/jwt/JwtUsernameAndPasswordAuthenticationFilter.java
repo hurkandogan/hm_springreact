@@ -1,15 +1,15 @@
 package com.hugos.hm.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hugos.hm.security.auth.ApplicationUser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +21,15 @@ import java.util.Date;
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtConfig jwtConfig;
+    private final SecretKey secretKey;
 
-    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager,
+                                                      JwtConfig jwtConfig,
+                                                      SecretKey secretKey) {
         this.authenticationManager = authenticationManager;
+        this.jwtConfig = jwtConfig;
+        this.secretKey = secretKey;
     }
 
     @Override
@@ -32,11 +38,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         try {
             UsernameAndPasswordAuthenticationRequest authenticationRequest = new ObjectMapper()
                     .readValue(request.getInputStream(), UsernameAndPasswordAuthenticationRequest.class);
-           Authentication authentiocation = new UsernamePasswordAuthenticationToken(
+           Authentication authentication = new UsernamePasswordAuthenticationToken(
                    authenticationRequest.getUsername(),
                    authenticationRequest.getPassword()
            );
-           return authenticationManager.authenticate(authentiocation);
+           return authenticationManager.authenticate(authentication);
         }catch(IOException ioe){
             throw new RuntimeException(ioe);
         }
@@ -48,14 +54,18 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
-        String jwtSecret = "hurkandoganhurkandoganhurkandoganhurkandoganhurkandoganhurkandoganhurkandoganhurkandogan";
-        String token = Jwts.builder()
+        String token =
+                Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
-                .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes()))
+                .signWith(secretKey)
                 .compact();
-        response.addHeader("Authorization", "Bearer " + token);
+        ApplicationUser user = (ApplicationUser) authResult.getPrincipal();
+        response.addHeader(jwtConfig.getAuthorizationHeader(),
+                jwtConfig.getTokenPrefix() + token);
+        response.addHeader("firstName", user.getFirstName() );
+        response.addHeader("lastName", user.getLastName() );
     }
 }

@@ -16,7 +16,7 @@ const Login = (props) => {
     const from: any  = location.state || { from: { pathname: '/' } };
 
     const INITIAL_USER_DATA = {
-        mail: "",
+        username: "",
         password: ""
     }
 
@@ -58,8 +58,8 @@ const Login = (props) => {
                 <div className="form-floating">
                     <input type="email"
                         className="form-control"
-                        id="mail"
-                        name="mail"
+                        id="username"
+                        name="username"
                         placeholder="name@example.com"
                         onChange={changeHandler}
                         autoComplete="disabled"

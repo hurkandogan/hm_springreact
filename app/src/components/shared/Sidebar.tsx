@@ -22,7 +22,7 @@ const Sidebar = (props) => {
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
-        if (user.accessToken) {
+        if (user.token) {
             setCurrentUser(user);
         }
     }, []);

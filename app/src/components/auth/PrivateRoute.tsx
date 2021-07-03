@@ -7,7 +7,7 @@ export const PrivateRoute = ({ children, ...rest }) => {
     return (
         <Route {...rest}
             render={({ location }) =>
-                user.accessToken ? (
+                user.token ? (
                     children
                 ) : (
                     <Redirect to={{

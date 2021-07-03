@@ -1,6 +1,6 @@
 package com.hugos.hm.security;
 
-import org.assertj.core.util.Sets;
+import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;
@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import static com.hugos.hm.security.UserPermission.*;
 
 public enum UserRoles {
-    SUPERADMIN(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet()),
-    USER(Sets.newHashSet());
+    SUPERADMIN(Sets.newHashSet(ARTWORK_EDIT)),
+    ADMIN(Sets.newHashSet(ARTWORK_EDIT)),
+    USER(Sets.newHashSet(ARTWORK_READ));
 
     private final Set<UserPermission> permissions;
 
