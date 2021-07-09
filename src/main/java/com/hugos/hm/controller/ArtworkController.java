@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/artwork")
+@RequestMapping("/api/artwork")
 public class ArtworkController {
 
     private final ArtworkService artworkService;
@@ -21,7 +21,7 @@ public class ArtworkController {
         this.artworkService = artworkService;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN', 'USER')")
     List<Artwork> all(){
         return artworkService.getAllArtworks();
@@ -33,13 +33,13 @@ public class ArtworkController {
         return artworkService.getOneArtwork(id);
     }
 
-    @PostMapping("/")
+    @PostMapping()
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
     public void insert(@RequestBody Artwork artwork){
         artworkService.insertArtwork(artwork);
     }
 
-    @PutMapping("/")
+    @PutMapping("/{artworkId}")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
     public void update(@RequestBody Artwork artwork){
         artworkService.insertArtwork(artwork);

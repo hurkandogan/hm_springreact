@@ -95,62 +95,62 @@
 
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				<artifactId>maven-resources-plugin</artifactId>-->
-<!--				<version>3.2.0</version>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>copy-resources</id>-->
-<!--						<phase>process-classes</phase>-->
-<!--						<goals>-->
-<!--							<goal>copy-resources</goal>-->
-<!--						</goals>-->
-<!--						<configuration>-->
-<!--							<outputDirectory>${basedir}/target/classes/static</outputDirectory>-->
-<!--							<resources>-->
-<!--								<resource>-->
-<!--									<directory>app/build</directory>-->
-<!--								</resource>-->
-<!--							</resources>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
 			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.12.0</version>
-				<configuration>
-					<nodeVersion>${node.version}</nodeVersion>
-					<npmVersion>${npm.version}</npmVersion>
-					<workingDirectory>src/main/webapp/WEB-INF/app</workingDirectory>
-				</configuration>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
 				<executions>
 					<execution>
-						<id>install node and npm</id>
+						<id>copy-resources</id>
+						<phase>process-classes</phase>
 						<goals>
-							<goal>install-node-and-npm</goal>
+							<goal>copy-resources</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>npm install</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<phase>generate-resources</phase>
-					</execution>
-					<execution>
-						<id>npm run build</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<phase>compile</phase>
 						<configuration>
-							<arguments>run build</arguments>
+							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/webapp/app/build</directory>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>com.github.eirslett</groupId>-->
+<!--				<artifactId>frontend-maven-plugin</artifactId>-->
+<!--				<version>1.12.0</version>-->
+<!--				<configuration>-->
+<!--					<nodeVersion>${node.version}</nodeVersion>-->
+<!--					<npmVersion>${npm.version}</npmVersion>-->
+<!--					<workingDirectory>src/main/webapp/app</workingDirectory>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>install node and npm</id>-->
+<!--						<goals>-->
+<!--							<goal>install-node-and-npm</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>npm install</id>-->
+<!--						<goals>-->
+<!--							<goal>npm</goal>-->
+<!--						</goals>-->
+<!--						<phase>generate-resources</phase>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>npm run build</id>-->
+<!--						<goals>-->
+<!--							<goal>npm</goal>-->
+<!--						</goals>-->
+<!--						<phase>compile</phase>-->
+<!--						<configuration>-->
+<!--							<arguments>run build</arguments>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -158,5 +158,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
