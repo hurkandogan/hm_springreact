@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,10 @@ public class ArtworkService {
     @Autowired
     public ArtworkService(ArtworkRepo artworkRepo) {
         this.artworkRepo = artworkRepo;
+    }
+
+    public Long getArtworkCount(){
+        return artworkRepo.count();
     }
 
     public List<Artwork> getAllArtworks(){

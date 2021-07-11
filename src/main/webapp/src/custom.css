@@ -10,7 +10,21 @@
 body {
     background-color: #f5f5f5;
 }
-
+.sidebar{
+    overflow: hidden scroll!important;
+}
+.loader{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color:rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    padding: 5% 35%;
+}
+.loader .spinner-border{
+    width: 10rem;
+    height: 10rem;
+}
 /* Login */
 .form-signin {
     max-width: 30%;

@@ -42,7 +42,7 @@ public class ArtworkController {
     @PutMapping("/{artworkId}")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
     public void update(@RequestBody Artwork artwork){
-        artworkService.insertArtwork(artwork);
+        artworkService.updateArtwork(artwork);
     }
 
     //TODO: DELETE

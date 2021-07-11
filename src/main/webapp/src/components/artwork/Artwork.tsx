@@ -24,7 +24,6 @@ const Artwork = () => {
                     authService.signout();
                     window.location.reload();
                 }
-                console.log(response);
                 setArtworks(response.data);
             })
             .catch(err => console.log(err));

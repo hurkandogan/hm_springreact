@@ -24,12 +24,12 @@ const InsertArtwork = (props) => {
     const [loading, setLoading] = useState(false);
     const [artwork, setArtwork] = useState(ARTWORK_INITIAL_VALUE);
 
-    const changeHandler = event => {
-        const { name, value } = event.target;
+    const changeHandler = e => {
+        const { name, value } = e.target;
         setArtwork({ ...artwork, [name]: value });
     };
-    const changeHandlerPrices = event => {
-        const { name, value } = event.target;
+    const changeHandlerPrices = e => {
+        const { name, value } = e.target;
         setArtwork({ ...artwork, [name]: value.replace(',', '.') });
     };
     

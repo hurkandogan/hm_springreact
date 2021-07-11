@@ -152,4 +152,25 @@ public class Artwork {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
+    @Override
+    public String toString() {
+        return "Artwork{" +
+                "id=" + id +
+                ", artistName='" + artistName + '\'' +
+                ", purchaseDate=" + purchaseDate +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", framing=" + framing +
+                ", imageLink='" + imageLink + '\'' +
+                ", purchaseLocation='" + purchaseLocation + '\'' +
+                ", artworkName='" + artworkName + '\'' +
+                ", price=" + price +
+                ", sizes='" + sizes + '\'' +
+                ", taxPrice=" + taxPrice +
+                ", transportPrice=" + transportPrice +
+                ", arr=" + arr +
+                ", notes='" + notes + '\'' +
+                '}';
+    }
 }
