@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,6 @@ public class ArtworkService {
     }
 
     public void insertArtwork(Artwork artwork){
-        System.out.println(artwork);
         artworkRepo.save(artwork);
     }
 

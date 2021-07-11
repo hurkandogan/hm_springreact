@@ -24,9 +24,13 @@ const InsertArtwork = (props) => {
     const [loading, setLoading] = useState(false);
     const [artwork, setArtwork] = useState(ARTWORK_INITIAL_VALUE);
 
-    const changeHanler = event => {
+    const changeHandler = event => {
         const { name, value } = event.target;
         setArtwork({ ...artwork, [name]: value });
+    };
+    const changeHandlerPrices = event => {
+        const { name, value } = event.target;
+        setArtwork({ ...artwork, [name]: value.replace(',', '.') });
     };
     
     const submitArtwork = async (e) => {
@@ -59,7 +63,7 @@ const InsertArtwork = (props) => {
                             placeholder="Artwork Name"
                             autoComplete="off"
                             value={artwork.artworkName}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="artistName">Artist Name</label>
@@ -70,7 +74,7 @@ const InsertArtwork = (props) => {
                             placeholder="Artist Name"
                             autoComplete="off"
                             value={artwork.artistName}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -83,7 +87,7 @@ const InsertArtwork = (props) => {
                             placeholder="Sizes"
                             autoComplete="off"
                             value={artwork.sizes}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="location">Location</label>
@@ -94,7 +98,7 @@ const InsertArtwork = (props) => {
                             placeholder="Location"
                             autoComplete="off"
                             value={artwork.location}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -107,7 +111,7 @@ const InsertArtwork = (props) => {
                             placeholder="Purchase Date"
                             autoComplete="off"
                             value={artwork.purchaseDate}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="purchaseLocation">Location of purchase</label>
@@ -118,7 +122,7 @@ const InsertArtwork = (props) => {
                             placeholder="Location of purchase"
                             autoComplete="off"
                             value={artwork.purchaseLocation}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -131,7 +135,7 @@ const InsertArtwork = (props) => {
                             placeholder="Price in €"
                             autoComplete="off"
                             value={artwork.price}
-                            onChange={changeHanler} />
+                            onChange={changeHandlerPrices} />
                     </div>
                     <div className="col">
                         <label htmlFor="taxPrice">Tax Cost</label>
@@ -142,7 +146,7 @@ const InsertArtwork = (props) => {
                             placeholder="Tax"
                             autoComplete="off"
                             value={artwork.taxPrice}
-                            onChange={changeHanler} />
+                            onChange={changeHandlerPrices} />
                     </div>
                     <div className="col">
                         <label htmlFor="transportPrice">Transport Cost</label>
@@ -153,7 +157,7 @@ const InsertArtwork = (props) => {
                             placeholder="Transport Cost"
                             autoComplete="off"
                             value={artwork.transportPrice}
-                            onChange={changeHanler} />
+                            onChange={changeHandlerPrices} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -166,7 +170,7 @@ const InsertArtwork = (props) => {
                             placeholder="Framing Cost"
                             autoComplete="off"
                             value={artwork.framing}
-                            onChange={changeHanler} />
+                            onChange={changeHandlerPrices} />
                     </div>
                     <div className="col">
                         <label htmlFor="arr">ARR</label>
@@ -176,7 +180,7 @@ const InsertArtwork = (props) => {
                             placeholder="ARR"
                             autoComplete="off"
                             value={artwork.arr}
-                            onChange={changeHanler}>
+                            onChange={changeHandler}>
                             <option value={'false'}>No</option>
                             <option value={'true'}>Yes</option>
                         </select>
@@ -189,7 +193,7 @@ const InsertArtwork = (props) => {
                             name="description"
                             id="description"
                             value={artwork.description}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="notes">Notes</label>
@@ -197,7 +201,7 @@ const InsertArtwork = (props) => {
                             name="notes"
                             id="notes"
                             value={artwork.notes}
-                            onChange={changeHanler} />
+                            onChange={changeHandler} />
                     </div>
                 </div>
                 <button className="btn btn-primary mt-3" disabled={loading}>
