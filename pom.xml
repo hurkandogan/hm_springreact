@@ -109,7 +109,7 @@
 							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${basedir}/src/main/webapp/app/build</directory>
+									<directory>${basedir}/src/main/webapp/build</directory>
 								</resource>
 							</resources>
 						</configuration>

@@ -38,9 +38,9 @@ build/
 src/main/resources/application.properties
 
 #Frontend
-src/main/webapp/app/node
-src/main/webapp/app/node/*
-src/main/webapp/app/node_modules
-src/main/webapp/app/build
+src/main/webapp/node
+src/main/webapp/node/*
+src/main/webapp/node_modules
+src/main/webapp/build
 mvnw.cmd
 mvnw
