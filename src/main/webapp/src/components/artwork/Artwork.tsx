@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../connection/common_http';
-import InsertArtwork from '../offcanvas/InsertArtwork';
-import ArtworkDetail from '../offcanvas/ArtworkDetail';
+import InsertArtwork from './InsertArtwork';
+import ArtworkDetail from './ArtworkDetail';
 import ArtworkRow from './ArtworkRow';
 import authService from '../../connection/auth.service';
 import ArtworkHeader from './ArtworkHeader';
@@ -69,12 +69,13 @@ const Artwork = () => {
                 editSelectedArtwork={editSelectedArtwork}
                 selectedArtwork={selectedArtwork}
             />
-            
+
             <div className="content-header">
                 <div className="container-fluid">
                     <ArtworkHeader
                         offCanvasHandler={offCanvasHandler}
                         artworkCount={artworks.length} />
+                    
                     {loading ? 
                         <div className="spinner-border text-dark table-spinner" role="status">
                             <span className="sr-only"></span>

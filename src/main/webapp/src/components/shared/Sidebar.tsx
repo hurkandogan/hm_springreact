@@ -6,25 +6,30 @@ import {
 } from 'react-icons/fa';
 import {
     BsCircle,
-    BsShield,
-    BsWrench,
-    BsHouseDoor
+    //BsShield,
+    //BsWrench,
+    //BsHouseDoor
 } from 'react-icons/bs';
 import avatar from '../../sample_avatar.jpg';
 import AuthService from '../../connection/auth.service';
+import User from '../types/User';
+
+//import { useSelector, useDispatch } from 'react-redux';
+//import { getLocations } from '../../redux/actions/locations';
 
 const Sidebar = (props) => {
 
-    const [currentUser, setCurrentUser] = useState({
-        firstName: '',
-        lastName: '',
-    });
+    //const locations = useSelector(state => state.locations);
+    //const dispatch = useDispatch();
+
+    const [currentUser, setCurrentUser] = useState<User>({} as User);
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
         if (user.token) {
             setCurrentUser(user);
         }
+        //dispatch(getLocations());
     }, []);
 
     return (

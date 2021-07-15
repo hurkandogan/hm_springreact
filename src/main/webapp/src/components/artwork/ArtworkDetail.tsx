@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import Moment from 'moment';
 
 const ArtworkDetail = (props) => {
 

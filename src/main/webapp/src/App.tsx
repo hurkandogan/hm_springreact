@@ -4,8 +4,6 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { userLogin } from './redux/actions/userLogin';
 import authService from './connection/auth.service';
 
 // Components
@@ -18,15 +16,17 @@ import Artwork from "./components/artwork/Artwork";
 
 function App() {
 
-    const [loggedUser, setLoggedUser] = useState({});
+    const [loggedUser, setLoggedUser] = useState({
+        firstName: '',
+        lastName: '',
+        token: ''
+    });
 
     const getUser = async () => setLoggedUser(authService.getCurrentUser());
-
-    //const loggedUser = useSelector(state => state.loggedUser);
-    //const dispatch = useDispatch();
     
     useEffect(() => {
         getUser();
+        console.log(authService.getCurrentUser());
     }, [])
 
     return (

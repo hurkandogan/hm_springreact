@@ -10,9 +10,7 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { reducer } from './redux/reducers/userLogin';
-
-
+import { reducer } from './redux/reducers/locations';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
