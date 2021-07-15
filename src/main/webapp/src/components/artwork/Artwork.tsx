@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import api from '../../connection/common_http';
 import InsertArtwork from '../offcanvas/InsertArtwork';
 import ArtworkDetail from '../offcanvas/ArtworkDetail';
-import {
-    BsPlusSquare,
-    BsCloudDownload
-    } from 'react-icons/bs';
+import ArtworkRow from './ArtworkRow';
 import authService from '../../connection/auth.service';
+import ArtworkHeader from './ArtworkHeader';
 
 const Artwork = () => {
 
@@ -17,6 +15,10 @@ const Artwork = () => {
     const [selectedArtwork, setSelectedArtwork] = useState({} || null);
 
     useEffect(() => {
+        getArtworks();
+    }, []);
+
+    const getArtworks = () => {
         setLoading(true);
         api.get('/api/artwork')
             .then(response => {
@@ -28,10 +30,10 @@ const Artwork = () => {
             })
             .catch(err => console.log(err));
         setLoading(false);
-    }, []);
-
+    };
     
     const offCanvasHandler = async () => setOffCanvasToggle(!offCanvasToggle);
+
     const offCanvasArtworkDetailHandler = async (value) => {
         setSelectedArtwork(value ?? {});
         setOffCanvasArtworkDetailToggle(!offCanvasArtworkDetailToggle);
@@ -42,22 +44,24 @@ const Artwork = () => {
         setSelectedArtwork({ ...selectedArtwork, [name]: value });
     };
 
-    const editSelectedArtwork = (e) => {
-        e.preventDefault();
+    const editSelectedArtwork = () => {
         setLoading(true);
         api.put('/api/artwork', selectedArtwork)
             .then(response => console.log(response))
             .catch(err => console.log(err));
         setSelectedArtwork({});
         setOffCanvasArtworkDetailToggle(!offCanvasArtworkDetailToggle);
+        getArtworks();
         setLoading(false);
     };
 
     return (
         <div className="content-wrapper">
+            
             <InsertArtwork
                 offCanvasToggle={offCanvasToggle}
                 offCanvasHandler={offCanvasHandler} />
+            
             <ArtworkDetail
                 offCanvasArtworkDetailToggle={offCanvasArtworkDetailToggle}
                 offCanvasArtworkDetailHandler={offCanvasArtworkDetailHandler}
@@ -65,23 +69,12 @@ const Artwork = () => {
                 editSelectedArtwork={editSelectedArtwork}
                 selectedArtwork={selectedArtwork}
             />
+            
             <div className="content-header">
                 <div className="container-fluid">
-                    <div className="row justify-content-between mb-3">
-                        <div className="col-6">
-                            <h1>Artwork</h1>
-                            <small>In Kai's Inventory there are {artworks.length} piece(s).</small>
-                        </div>
-                        <div className="col-6 btn-container">
-                            <button className="btn btn-primary" disabled={true}>
-                                <BsCloudDownload /> Download as PDF(<small>in Development</small>)
-                            </button>
-                            <button className="btn btn-primary"
-                                onMouseUp={offCanvasHandler}>
-                                <BsPlusSquare /> Add New Artwork
-                            </button>
-                        </div>
-                    </div>
+                    <ArtworkHeader
+                        offCanvasHandler={offCanvasHandler}
+                        artworkCount={artworks.length} />
                     {loading ? 
                         <div className="spinner-border text-dark table-spinner" role="status">
                             <span className="sr-only"></span>
@@ -100,14 +93,12 @@ const Artwork = () => {
                         <tbody>
                             {artworks &&
                                 artworks.map((el) => {
-                                return (
-                                        <tr key={el.id} onMouseUp={() => offCanvasArtworkDetailHandler(el)}>
-                                        <th scope="row"><img src="https://picsum.photos/50/50" alt={el.artwork_name} /></th>
-                                        <td>{el.artworkName}</td>
-                                        <td>{el.artistName}</td>
-                                        <td>{el.location}</td>
-                                        <td>{el.price} €</td>
-                                    </tr>
+                                    return (
+                                        <ArtworkRow
+                                            key={el.id}
+                                            el={el}
+                                            offCanvasArtworkDetailHandler={offCanvasArtworkDetailHandler}
+                                             />
                                 );
                             })
                             }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,12 +35,14 @@ public class ArtworkService {
         artworkRepo.save(artwork);
     }
 
-    public void deleteArtwork(Long id){
+    public void deleteArtwork(Artwork artwork){
+        Long id = artwork.getId();
         artworkRepo.deleteById(id);
     }
 
     @Transactional
     public void updateArtwork(Artwork artwork){
+        System.out.println(artwork.getId());
         Artwork artworkOptional = artworkRepo.findById(artwork.getId())
                 .orElseThrow(() -> new IllegalStateException((
                         "Artwork with this id: " + artwork.getId() + " is not found!"

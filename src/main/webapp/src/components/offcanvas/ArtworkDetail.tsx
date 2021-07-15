@@ -14,6 +14,12 @@ const ArtworkDetail = (props) => {
             editFormHandler();
         }
     };
+
+    const handleOnSave = (e) => {
+        e.preventDefault();
+        props.editSelectedArtwork();
+        handleOnClose();
+    }
     
     return (
         <Menu
@@ -33,14 +39,13 @@ const ArtworkDetail = (props) => {
             </div>
             </div>
             {showEditForm ? (
-                <form onSubmit={props.editSelectedArtwork}>
+                <form onSubmit={handleOnSave}>
                     <p>Edit form</p>
-                    <input type="text"
+                    <input type="hidden"
                         id="id"
                         name="id"
                         value={props.selectedArtwork.id ?? ""}
-                        readOnly
-                        hidden />
+                        readOnly />
                 <div className="row mt-3">
                     <div className="col">
                         <label htmlFor="artworkName">Artwork Name</label>
