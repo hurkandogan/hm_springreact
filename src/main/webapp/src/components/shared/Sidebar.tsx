@@ -10,17 +10,17 @@ import {
     //BsWrench,
     //BsHouseDoor
 } from 'react-icons/bs';
-import avatar from '../../sample_avatar.jpg';
+import avatar from '../../sample_avatar.png';
 import AuthService from '../../connection/auth.service';
 import User from '../types/User';
 
-//import { useSelector, useDispatch } from 'react-redux';
-//import { getLocations } from '../../redux/actions/locations';
+import { useSelector, useDispatch } from 'react-redux';
+import { locations } from '../../redux/actions/locations';
 
 const Sidebar = (props) => {
 
-    //const locations = useSelector(state => state.locations);
-    //const dispatch = useDispatch();
+    const getLocations = useSelector(state => state.locations);
+    const dispatch = useDispatch();
 
     const [currentUser, setCurrentUser] = useState<User>({} as User);
 
@@ -29,7 +29,7 @@ const Sidebar = (props) => {
         if (user.token) {
             setCurrentUser(user);
         }
-        //dispatch(getLocations());
+        dispatch(locations());
     }, []);
 
     return (

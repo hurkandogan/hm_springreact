@@ -5,6 +5,7 @@ import {
     Route
 } from "react-router-dom";
 import authService from './connection/auth.service';
+import User from './components/types/User';
 
 // Components
 import { PrivateRoute } from './components/auth/PrivateRoute';
@@ -16,17 +17,12 @@ import Artwork from "./components/artwork/Artwork";
 
 function App() {
 
-    const [loggedUser, setLoggedUser] = useState({
-        firstName: '',
-        lastName: '',
-        token: ''
-    });
+    const [loggedUser, setLoggedUser] = useState<User>({} as User);
 
     const getUser = async () => setLoggedUser(authService.getCurrentUser());
     
     useEffect(() => {
         getUser();
-        console.log(authService.getCurrentUser());
     }, [])
 
     return (
