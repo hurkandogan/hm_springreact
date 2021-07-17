@@ -1,9 +1,11 @@
+import type Location from '../../components/types/Location'
+
 const INITIAL_STATE = {
     isLoading: false,
-    locations: {},
+    locations: typeof Location !== 'undefined' ? [Location] : [],
     msg: {}
 }
-export const reducer = (state = INITIAL_STATE, action) => {
+export const locationReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'LOCATION_LOAD_START':
             return { ...state, isLoading: true, message: '' };

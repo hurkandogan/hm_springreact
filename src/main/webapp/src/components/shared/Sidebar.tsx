@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
     FaSearch,
@@ -6,31 +6,27 @@ import {
 } from 'react-icons/fa';
 import {
     BsCircle,
-    //BsShield,
-    //BsWrench,
-    //BsHouseDoor
+    BsShield,
+    BsWrench,
+    BsHouseDoor
 } from 'react-icons/bs';
 import avatar from '../../sample_avatar.png';
-import AuthService from '../../connection/auth.service';
-import User from '../types/User';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { locations } from '../../redux/actions/locations';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { loadLocations } from '../../redux/actions/locations';
 
-const Sidebar = (props) => {
+const Sidebar = () => {
 
-    const getLocations = useSelector(state => state.locations);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const [currentUser, setCurrentUser] = useState<User>({} as User);
+    const getLocations = useAppSelector(state => state.locations.locations);
+    const loggedUser  = useAppSelector(state => state.loggedUser.loggedUser);
+    
+
 
     useEffect(() => {
-        const user = AuthService.getCurrentUser();
-        if (user.token) {
-            setCurrentUser(user);
-        }
-        dispatch(locations());
-    }, []);
+        dispatch(loadLocations());
+    }, [dispatch]);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -43,7 +39,7 @@ const Sidebar = (props) => {
                     <img src={avatar} alt="Avatar" className="img-circle elevation-2" />
             	</div> 
                     <div className="info">
-                        <p className="user-info">{currentUser.firstName + " " + currentUser.lastName}</p>
+                        <p className="user-info">{loggedUser.firstName + " " + loggedUser.lastName}</p>
                     </div>
                 </div>
 
@@ -62,37 +58,52 @@ const Sidebar = (props) => {
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li className="nav-header">General</li>
                         <li className="nav-item menu-open">
-                            <NavLink to={"/"} className="nav-link">
+                            <NavLink to={"/"}
+                                className="nav-link"
+                                activeClassName="active">
                                 <FaTachometerAlt />
                                 <p>Dashboard</p>
                             </NavLink>
                         </li>
                         <li className="nav-header">Artworks</li>
                         <li className="nav-item">
-                            <NavLink to={"/artwork"} className="nav-link" activeClassName="active">
+                            <NavLink to={"/artwork"}
+                                className="nav-link"
+                                activeClassName="active">
                                 <BsCircle />
                                 <p>Artworks</p>
                             </NavLink>
                         </li>
                         <li className="nav-header">House Management (In Development)</li>
                         <li className="nav-item">
-                            {/* <NavLink to={"/"} className="nav-link">
+                            <NavLink to={"/versicherungen"}
+                                className="nav-link"
+                                activeClassName="active">
                                 <BsShield />
                                 <p>Versicherungen</p>
-                            </NavLink> */}
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            {/* <NavLink to={"/"} className="nav-link">
+                            <NavLink to={"/renovierungskosten"}
+                                className="nav-link"
+                                activeClassName="active">
                                 <BsWrench />
                                 <p>Renovierungskosten</p>
-                            </NavLink> */}
+                            </NavLink>
                         </li>
-                        <li className="nav-item">
-                            {/* <NavLink to={"/"} className="nav-link" activeClassName="active">
-                                <BsHouseDoor />
-                                <p>Berliner Str.</p>
-                            </NavLink> */}
-                        </li>
+                        {getLocations.map(location => {
+                            return (
+                                <li className="nav-item" key={location.name}>
+                                    <NavLink to={"/location/" + location.id}
+                                        className="nav-link"
+                                        activeClassName="active">
+                                        <BsHouseDoor />
+                                        <p>{location.name}</p>
+                                    </NavLink>
+                                </li>
+                            );
+                        })
+                        }
                     </ul>
                 </nav>
             </div>

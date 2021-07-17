@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
     HashRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
-import authService from './connection/auth.service';
-import User from './components/types/User';
 
 // Components
 import { PrivateRoute } from './components/auth/PrivateRoute';
@@ -15,15 +13,18 @@ import Sidebar from "./components/shared/Sidebar";
 import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 
+import { useAppSelector, useAppDispatch } from './redux/hooks';
+import { loadUser } from './redux/actions/user';
+
 function App() {
 
-    const [loggedUser, setLoggedUser] = useState<User>({} as User);
+    const loggedUser = useAppSelector(state => state.loggedUser.loggedUser);
+    const dispatch = useAppDispatch();
 
-    const getUser = async () => setLoggedUser(authService.getCurrentUser());
     
     useEffect(() => {
-        getUser();
-    }, [])
+        dispatch(loadUser());
+    }, [dispatch])
 
     return (
         <Router>
