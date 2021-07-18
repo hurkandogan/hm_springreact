@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationService {
@@ -18,6 +19,10 @@ public class LocationService {
 
     public List<Location> getAllLocations(){
         return locationRepo.findAll();
+    }
+
+    public Optional<Location> getOneLocation(Long id){
+        return locationRepo.findById(id);
     }
 
     public void insertLocation(Location location) {

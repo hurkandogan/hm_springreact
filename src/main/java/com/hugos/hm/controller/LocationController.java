@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/location")
@@ -21,6 +22,13 @@ public class LocationController {
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN', 'USER')")
     public List<Location> get(){
         return locationService.getAllLocations();
+    }
+
+    @GetMapping("/{locationId}")
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN', 'USER')")
+    public Optional<Location> getOne(@PathVariable("locationId") Long id){
+        System.out.println(id);
+        return locationService.getOneLocation(id);
     }
 
     @PostMapping

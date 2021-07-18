@@ -12,6 +12,7 @@ import TopNav from "./components/shared/TopNav";
 import Sidebar from "./components/shared/Sidebar";
 import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
+import Location from "./components/location/Location";
 
 import { useAppSelector, useAppDispatch } from './redux/hooks';
 import { loadUser } from './redux/actions/user';
@@ -42,6 +43,9 @@ function App() {
 
                         <PrivateRoute path={'/artwork'}>
                             <Artwork />
+                        </PrivateRoute>
+                        <PrivateRoute path={'/location/:locationId'}>
+                            <Location />
                         </PrivateRoute>
                     </Switch>
                 </div> 
