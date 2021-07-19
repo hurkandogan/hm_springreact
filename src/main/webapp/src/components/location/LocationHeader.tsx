@@ -10,7 +10,7 @@ const LocationHeader = (props) => {
                 <div className="row justify-content-between mb-3">
                     <div className="col-6">
                         <h1>{props.locationName}</h1>
-                        <small>For {props.locationName} there are {props.locationInvoiceCount} invoice(s).</small>
+                        <small>For {props.locationName} there are 0 invoice(s).</small>
                     </div>
 
                     <div className="col-6 btn-container">

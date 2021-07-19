@@ -21,15 +21,26 @@ const Location = (props) => {
             <LocationHeader
                 locationName={location.name}
                 locationShortName={location.shortName}
-                locationInvoiceCount={location.invoices.length}
+                locationInvoiceCount={location.invoices}
+                // TODO: length is undefined on invoices
             />
             <nav aria-label="Page navigation example">
                 <ul className="pagination">
-                    <li className="page-item"><a className="page-link">Previous</a></li>
-                    <li className="page-item"><a className="page-link">1</a></li>
-                    <li className="page-item"><a className="page-link">2</a></li>
-                    <li className="page-item"><a className="page-link">3</a></li>
-                    <li className="page-item"><a className="page-link">Next</a></li>
+                    <li className="page-item">
+                        <a className="page-link">Previous</a>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">1</a>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">2</a>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">3</a>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">Next</a>
+                    </li>
                 </ul>
             </nav>
             <ul className="nav nav-tabs"
@@ -44,7 +55,7 @@ const Location = (props) => {
                         type="button"
                         role="tab"
                         aria-controls="home"
-                        aria-selected="true">Home</button>
+                        aria-selected="true">2019</button>
                 </li>
                 <li className="nav-item" role="presentation">
                     <button className="nav-link"
@@ -54,7 +65,7 @@ const Location = (props) => {
                         type="button"
                         role="tab"
                         aria-controls="profile"
-                        aria-selected="false">Profile</button>
+                        aria-selected="false">2020</button>
                 </li>
                 <li className="nav-item"
                     role="presentation">
@@ -65,7 +76,7 @@ const Location = (props) => {
                         type="button"
                         role="tab"
                         aria-controls="contact"
-                        aria-selected="false">Contact</button>
+                        aria-selected="false">2021</button>
                 </li>
             </ul>
             <div className="tab-content" id="myTabContent">
