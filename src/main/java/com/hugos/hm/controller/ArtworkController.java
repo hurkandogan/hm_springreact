@@ -1,7 +1,6 @@
 package com.hugos.hm.controller;
 
 import com.hugos.hm.model.Artwork;
-import com.hugos.hm.repository.ArtworkRepo;
 import com.hugos.hm.services.ArtworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

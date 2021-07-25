@@ -12,7 +12,7 @@ public class Location {
     private Long id;
     private String name;
     private String shortName;
-    private String adress;
+    private String address;
     @OneToMany(mappedBy = "location")
     private Set<Invoice> invoices;
 
@@ -24,10 +24,10 @@ public class Location {
 
     public Location(String name,
                     String shortName,
-                    String adress) {
+                    String address) {
         this.name = name;
         this.shortName = shortName;
-        this.adress = adress;
+        this.address = address;
     }
 
     public Long getId() {
@@ -54,12 +54,12 @@ public class Location {
         this.shortName = shortName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public Set<Invoice> getInvoices() {
