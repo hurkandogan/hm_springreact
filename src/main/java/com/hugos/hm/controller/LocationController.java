@@ -27,7 +27,6 @@ public class LocationController {
     @GetMapping("/{locationId}")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN', 'USER')")
     public Optional<Location> getOne(@PathVariable("locationId") Long id){
-        System.out.println(id);
         return locationService.getOneLocation(id);
     }
 

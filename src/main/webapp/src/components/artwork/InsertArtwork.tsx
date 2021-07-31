@@ -1,47 +1,29 @@
 import React, { useState } from 'react';
 import api from '../../connection/common_http';
+import { InsertArtworkHook } from './InsertArtworkHook';
+import { artworkValidation } from './ArtworkFieldValidation';
 
 import { slide as Menu } from 'react-burger-menu';
 
 const InsertArtwork = (props) => {
 
-    const ARTWORK_INITIAL_VALUE = {
-        artworkName: "",
-        artistName: "",
-        sizes: "",
-        location: "",
-        purchaseDate: "",
-        purchaseLocation: "",
-        price: "",
-        taxPrice: "",
-        transportPrice: "",
-        arr: 0,
-        framing: "",
-        description: "",
-        notes:"",
-    };
-
     const [loading, setLoading] = useState(false);
-    const [artwork, setArtwork] = useState(ARTWORK_INITIAL_VALUE);
-
-    const changeHandler = e => {
-        const { name, value } = e.target;
-        setArtwork({ ...artwork, [name]: value });
-    };
-    const changeHandlerPrices = e => {
-        const { name, value } = e.target;
-        setArtwork({ ...artwork, [name]: value.replace(',', '.') });
-    };
+    const [artwork,
+        artworkChangeHandler,
+        pricesChangeHandler,
+        clearState] = InsertArtworkHook();
     
     const submitArtwork = async (e) => {
         e.preventDefault();
         setLoading(true);
-        await api.post("/api/artwork", artwork)
-            .then(response => console.log(response))
-            .catch(err => console.log(err));
-        setArtwork(ARTWORK_INITIAL_VALUE);
+        if (artworkValidation(artwork)) {
+            await api.post("/api/artwork", artwork)
+                .then(response => console.log(response))
+                .catch(err => console.log(err));
+            clearState();
+            props.offCanvasHandler();
+        }
         setLoading(false);
-        props.offCanvasHandler();
     }
 
     return (
@@ -49,8 +31,8 @@ const InsertArtwork = (props) => {
             width={'50%'}
             isOpen={props.offCanvasToggle}
             onClose={props.offCanvasHandler}
-            right
-        >
+            right>
+            
             <h3>Add new Artwork</h3>
             <form onSubmit={submitArtwork}>
                 <div className="row mt-3">
@@ -63,7 +45,7 @@ const InsertArtwork = (props) => {
                             placeholder="Artwork Name"
                             autoComplete="off"
                             value={artwork.artworkName}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="artistName">Artist Name</label>
@@ -74,7 +56,7 @@ const InsertArtwork = (props) => {
                             placeholder="Artist Name"
                             autoComplete="off"
                             value={artwork.artistName}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -87,7 +69,7 @@ const InsertArtwork = (props) => {
                             placeholder="Sizes"
                             autoComplete="off"
                             value={artwork.sizes}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="location">Location</label>
@@ -98,7 +80,7 @@ const InsertArtwork = (props) => {
                             placeholder="Location"
                             autoComplete="off"
                             value={artwork.location}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -111,7 +93,7 @@ const InsertArtwork = (props) => {
                             placeholder="Purchase Date"
                             autoComplete="off"
                             value={artwork.purchaseDate}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="purchaseLocation">Location of purchase</label>
@@ -122,7 +104,7 @@ const InsertArtwork = (props) => {
                             placeholder="Location of purchase"
                             autoComplete="off"
                             value={artwork.purchaseLocation}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -135,7 +117,7 @@ const InsertArtwork = (props) => {
                             placeholder="Price in €"
                             autoComplete="off"
                             value={artwork.price}
-                            onChange={changeHandlerPrices} />
+                            onChange={pricesChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="taxPrice">Tax Cost</label>
@@ -146,7 +128,7 @@ const InsertArtwork = (props) => {
                             placeholder="Tax"
                             autoComplete="off"
                             value={artwork.taxPrice}
-                            onChange={changeHandlerPrices} />
+                            onChange={pricesChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="transportPrice">Transport Cost</label>
@@ -157,7 +139,7 @@ const InsertArtwork = (props) => {
                             placeholder="Transport Cost"
                             autoComplete="off"
                             value={artwork.transportPrice}
-                            onChange={changeHandlerPrices} />
+                            onChange={pricesChangeHandler} />
                     </div>
                 </div>
                 <div className="row mt-3">
@@ -170,7 +152,7 @@ const InsertArtwork = (props) => {
                             placeholder="Framing Cost"
                             autoComplete="off"
                             value={artwork.framing}
-                            onChange={changeHandlerPrices} />
+                            onChange={pricesChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="arr">ARR</label>
@@ -180,7 +162,7 @@ const InsertArtwork = (props) => {
                             placeholder="ARR"
                             autoComplete="off"
                             value={artwork.arr}
-                            onChange={changeHandler}>
+                            onChange={artworkChangeHandler}>
                             <option value={'false'}>No</option>
                             <option value={'true'}>Yes</option>
                         </select>
@@ -193,7 +175,7 @@ const InsertArtwork = (props) => {
                             name="description"
                             id="description"
                             value={artwork.description}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                     <div className="col">
                         <label htmlFor="notes">Notes</label>
@@ -201,7 +183,7 @@ const InsertArtwork = (props) => {
                             name="notes"
                             id="notes"
                             value={artwork.notes}
-                            onChange={changeHandler} />
+                            onChange={artworkChangeHandler} />
                     </div>
                 </div>
                 <button className="btn btn-primary mt-3" disabled={loading}>

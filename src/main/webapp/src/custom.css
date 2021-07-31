@@ -92,6 +92,9 @@ body {
     left: 36px;
     top: 36px;
 }
+.error {
+    border: 2px solid #FF0000;
+}
 /* .offcanvas-headline {
     display: inline-block!important;
 }

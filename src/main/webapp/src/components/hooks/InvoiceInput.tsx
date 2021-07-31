@@ -30,6 +30,5 @@ export const InvoiceInput = () => {
             invoiceLink: ''
         });
     };
-
     return [inputs, changeHandler, clearForm];
 };
