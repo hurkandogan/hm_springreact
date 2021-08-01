@@ -46,7 +46,7 @@ public class ArtworkController {
 
     @DeleteMapping ("/{artworkId}")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
-    public void delete(@PathVariable("artworkId") Long id){
-        artworkService.deleteArtwork(id);
+    public String delete(@PathVariable("artworkId") Long id){
+        return artworkService.deleteArtwork(id);
     }
 }

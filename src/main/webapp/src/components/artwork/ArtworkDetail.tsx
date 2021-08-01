@@ -10,26 +10,25 @@ const ArtworkDetail = (props) => {
 
     const handleOnClose = () => {
         props.offCanvasArtworkDetailHandler();
+        props.getArtworks();
         if (showEditForm) {
             editFormHandler();
         }
     };
 
-    const handleOnSave = (e) => {
+    const handleOnSave = async (e: any) => {
         e.preventDefault();
-        props.editSelectedArtwork();
-        props.getArtworks();
+        await props.editSelectedArtwork();
         handleOnClose();
     }
 
     const deleteArtwork = (artworkId: number): void => {
         api.delete(`/api/artwork/${artworkId}`)
             .then(response => {
-                console.log(response)
-                props.getArtworks();
+                console.log(response);
+                handleOnClose();
             })
             .catch(error => console.log(error));
-        handleOnClose();
     }
 
     return (

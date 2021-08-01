@@ -1,13 +1,15 @@
 package com.hugos.hm.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name="artworks")
+@SQLDelete(sql = "UPDATE artworks SET deleted = true WHERE id = ?")
+@Where(clause = "DELETED = false")
 public class Artwork {
     @Id
     @GeneratedValue
@@ -27,6 +29,7 @@ public class Artwork {
     private boolean arr = false;
     private String notes;
     private boolean artworkIsSold = false;
+    private boolean isDeleted = false;
 
     public Artwork() {}
 
@@ -160,6 +163,13 @@ public class Artwork {
 
     public void setArtworkIsSold(boolean artworkIsSold) {
         this.artworkIsSold = artworkIsSold;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+    public void setIsDeleted() {
+        this.isDeleted = true;
     }
 
     @Override

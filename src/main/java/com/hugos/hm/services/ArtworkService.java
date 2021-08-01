@@ -35,8 +35,17 @@ public class ArtworkService {
         artworkRepo.save(artwork);
     }
 
-    public void deleteArtwork(Long artworkId){
-        artworkRepo.deleteById(artworkId);
+    public String deleteArtwork(Long artworkId){
+        Optional<Artwork> artwork = artworkRepo.findById(artworkId);
+        if(artwork.isPresent()){
+            Artwork artworkData = artwork.get();
+            artworkData.setIsDeleted();
+            artworkRepo.flush();
+            return artworkData.getArtworkName() +
+                    " is deleted successfully.";
+        } else {
+            return "Artwork with this id "+ artworkId +" is not found.";
+        }
     }
 
     @Transactional

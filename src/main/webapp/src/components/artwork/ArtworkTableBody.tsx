@@ -9,12 +9,6 @@ const ArtworkTableBody = (props: any) => {
         setArtworks(props.artworks);
     }, [props.artworks]);
 
-    const delayForArtworkList = () =>{
-        setTimeout(() => {
-            return artworks;
-        }, 3000);
-    }
-
     return (
         <table className="table table-striped table-hover table-sm">
             <thead>
