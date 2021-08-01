@@ -13,14 +13,15 @@ const InsertArtwork = (props) => {
         pricesChangeHandler,
         clearState] = InsertArtworkHook();
     
-    const submitArtwork = async (e) => {
+    const submitArtwork = async (e: any) => {
         e.preventDefault();
         setLoading(true);
         if (artworkValidation(artwork)) {
             await api.post("/api/artwork", artwork)
                 .then(response => console.log(response))
-                .catch(err => console.log(err));
+                .catch(err => console.error(err));
             clearState();
+            props.getArtworks();
             props.offCanvasHandler();
         }
         setLoading(false);

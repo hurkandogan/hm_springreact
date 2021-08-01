@@ -42,5 +42,6 @@ src/main/webapp/node
 src/main/webapp/node/*
 src/main/webapp/node_modules
 src/main/webapp/build
+src/main/webapp/.eslintrc.json
 mvnw.cmd
 mvnw

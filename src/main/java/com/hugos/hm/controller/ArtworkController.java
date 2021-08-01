@@ -44,9 +44,9 @@ public class ArtworkController {
         artworkService.updateArtwork(artwork);
     }
 
-    @DeleteMapping ()
+    @DeleteMapping ("/{artworkId}")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
-    public void delete(@RequestBody Artwork artwork){
-        artworkService.deleteArtwork(artwork);
+    public void delete(@PathVariable("artworkId") Long id){
+        artworkService.deleteArtwork(id);
     }
 }

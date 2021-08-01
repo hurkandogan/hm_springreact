@@ -95,6 +95,14 @@ body {
 .error {
     border: 2px solid #FF0000;
 }
+.edit-form-btn{
+    max-width: 100%;
+    text-align: center;
+}
+.edit-form-btn button{
+    margin: 0 auto;
+    width: 60%;
+}
 /* .offcanvas-headline {
     display: inline-block!important;
 }

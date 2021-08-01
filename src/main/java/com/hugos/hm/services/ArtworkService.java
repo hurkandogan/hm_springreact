@@ -35,9 +35,8 @@ public class ArtworkService {
         artworkRepo.save(artwork);
     }
 
-    public void deleteArtwork(Artwork artwork){
-        Long id = artwork.getId();
-        artworkRepo.deleteById(id);
+    public void deleteArtwork(Long artworkId){
+        artworkRepo.deleteById(artworkId);
     }
 
     @Transactional

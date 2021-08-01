@@ -24,8 +24,9 @@ public class Artwork {
     private String sizes;
     private double taxPrice;
     private double transportPrice;
-    private boolean arr;
+    private boolean arr = false;
     private String notes;
+    private boolean artworkIsSold = false;
 
     public Artwork() {}
 
@@ -153,6 +154,14 @@ public class Artwork {
         this.notes = notes;
     }
 
+    public boolean isArtworkIsSold() {
+        return artworkIsSold;
+    }
+
+    public void setArtworkIsSold(boolean artworkIsSold) {
+        this.artworkIsSold = artworkIsSold;
+    }
+
     @Override
     public String toString() {
         return "Artwork{" +
@@ -171,6 +180,7 @@ public class Artwork {
                 ", transportPrice=" + transportPrice +
                 ", arr=" + arr +
                 ", notes='" + notes + '\'' +
+                ", artworkIsSold='" + artworkIsSold + '\'' +
                 '}';
     }
 }

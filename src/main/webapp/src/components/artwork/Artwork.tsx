@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import api from '../../connection/common_http';
 import InsertArtwork from './InsertArtwork';
 import ArtworkDetail from './ArtworkDetail';
-import ArtworkRow from './ArtworkRow';
 import authService from '../../connection/auth.service';
 import ArtworkHeader from './ArtworkHeader';
+import ArtworkTableBody from './ArtworkTableBody';
 
 const Artwork = () => {
 
@@ -22,7 +22,7 @@ const Artwork = () => {
         setLoading(true);
         api.get('/api/artwork')
             .then(response => {
-                if (response.status === 401) {
+                if (response.status !== 200) {
                     authService.signout();
                     window.location.reload();
                 }
@@ -31,7 +31,7 @@ const Artwork = () => {
             .catch(err => console.log(err));
         setLoading(false);
     };
-    
+
     const offCanvasHandler = async () => setOffCanvasToggle(!offCanvasToggle);
 
     const offCanvasArtworkDetailHandler = async (value) => {
@@ -51,23 +51,25 @@ const Artwork = () => {
             .catch(err => console.log(err));
         setSelectedArtwork({});
         setOffCanvasArtworkDetailToggle(!offCanvasArtworkDetailToggle);
-        getArtworks();
         setLoading(false);
     };
 
     return (
         <div className="content-wrapper">
-            
+
             <InsertArtwork
                 offCanvasToggle={offCanvasToggle}
-                offCanvasHandler={offCanvasHandler} />
-            
+                offCanvasHandler={offCanvasHandler}
+                getArtworks={getArtworks}
+            />
+
             <ArtworkDetail
                 offCanvasArtworkDetailToggle={offCanvasArtworkDetailToggle}
                 offCanvasArtworkDetailHandler={offCanvasArtworkDetailHandler}
                 editSelectedArtworkHandler={editSelectedArtworkHandler}
                 editSelectedArtwork={editSelectedArtwork}
                 selectedArtwork={selectedArtwork}
+                getArtworks={getArtworks}
             />
 
             <div className="content-header">
@@ -75,37 +77,17 @@ const Artwork = () => {
                     <ArtworkHeader
                         offCanvasHandler={offCanvasHandler}
                         artworkCount={artworks.length} />
-                    
-                    {loading ? 
+
+                    {loading ?
                         <div className="spinner-border text-dark table-spinner" role="status">
                             <span className="sr-only"></span>
                         </div>
                         :
-                    <table className="table table-striped table-hover table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Image</th>
-                                <th scope="col">Artwork</th>
-                                <th scope="col">Artist</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {artworks &&
-                                artworks.map((el) => {
-                                    return (
-                                        <ArtworkRow
-                                            key={el.id}
-                                            el={el}
-                                            offCanvasArtworkDetailHandler={offCanvasArtworkDetailHandler}
-                                             />
-                                );
-                            })
-                            }
-                        </tbody>
-                    </table>
-                   }
+                        <ArtworkTableBody
+                            artworks={artworks}
+                            offCanvasArtworkDetailHandler={offCanvasArtworkDetailHandler}
+                        />
+                    }
                 </div>
             </div>
         </div>

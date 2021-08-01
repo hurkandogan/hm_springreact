@@ -1,17 +1,16 @@
 import React from 'react';
 
 const ArtworkRow = (props) => {
-
     return (
-        <tr key={props.el.id}
-            onMouseUp={() => props.offCanvasArtworkDetailHandler(props.el)}>
+        <tr
+            onMouseUp={() => props.offCanvasArtworkDetailHandler(props.value)}>
             <th scope="row">
-                <img src="https://picsum.photos/50/50" alt={props.el.artworkName} />
+                <img src="https://picsum.photos/50/50" alt={props.value.artworkName} />
             </th>
-            <td>{props.el.artworkName}</td>
-            <td>{props.el.artistName}</td>
-            <td>{props.el.location}</td>
-            <td>{props.el.price} €</td>
+            <td>{props.value.artworkName}</td>
+            <td>{props.value.artistName}</td>
+            <td>{props.value.location}</td>
+            <td>{props.value.price} €</td>
         </tr>
     );
 };
