@@ -1,7 +1,7 @@
 package com.hugos.hm.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hugos.hm.security.auth.ApplicationUser;
+import com.hugos.hm.security.auth.AppUser;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -62,7 +62,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
                 .signWith(secretKey)
                 .compact();
-        ApplicationUser user = (ApplicationUser) authResult.getPrincipal();
+        AppUser user = (AppUser) authResult.getPrincipal();
         response.addHeader(jwtConfig.getAuthorizationHeader(),
                 jwtConfig.getTokenPrefix() + token);
         response.addHeader("firstName", user.getFirstName() );

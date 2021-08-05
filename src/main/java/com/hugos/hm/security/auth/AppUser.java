@@ -1,12 +1,13 @@
 package com.hugos.hm.security.auth;
 
+import com.hugos.hm.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Set;
 
-public class ApplicationUser implements UserDetails {
+public class AppUser implements UserDetails {
     private final String username;
     private final String password;
     private final String firstName;
@@ -17,7 +18,7 @@ public class ApplicationUser implements UserDetails {
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
-    public ApplicationUser(String username,
+    public AppUser(String username,
                            String password,
                            String firstName, String lastName, Set<? extends GrantedAuthority> grantedAuthorities,
                            boolean isAccountNonExpired,
@@ -37,45 +38,58 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return grantedAuthorities;
+        return null;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return null;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return null;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
+        return false;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
+        return false;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-        return isEnabled;
+        return false;
     }
 
-    public String getFirstName() {
+    public String getFirstName(){
         return firstName;
     }
-
-    public String getLastName() {
+    public String getLastName(){
         return lastName;
     }
 
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", grantedAuthorities=" + grantedAuthorities +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                '}';
+    }
 }

@@ -1,13 +1,12 @@
 package com.hugos.hm.security;
 
-import com.hugos.hm.security.auth.ApplicationUserService;
+import com.hugos.hm.security.auth.AppUserDetailsService;
 import com.hugos.hm.security.jwt.JwtConfig;
 import com.hugos.hm.security.jwt.JwtTokenVerifier;
 import com.hugos.hm.security.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -21,7 +20,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.crypto.SecretKey;
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -32,17 +30,17 @@ import java.util.List;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final ApplicationUserService applicationUserService;
+    private final AppUserDetailsService appUserDetailsService;
     private final SecretKey secretKey;
     private final JwtConfig jwtConfig;
 
     @Autowired
     public SecurityConfiguration(PasswordEncoder passwordEncoder,
-                                 ApplicationUserService applicationUserService,
+                                 AppUserDetailsService appUserDetailsService,
                                  SecretKey secretKey,
                                  JwtConfig jwtConfig){
         this.passwordEncoder = passwordEncoder;
-        this.applicationUserService = applicationUserService;
+        this.appUserDetailsService = appUserDetailsService;
         this.secretKey = secretKey;
         this.jwtConfig = jwtConfig;
     }
@@ -72,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(applicationUserService);
+        provider.setUserDetailsService(appUserDetailsService);
         return provider;
     }
     @Bean
