@@ -12,7 +12,7 @@ const Login = (props) => {
 
     const history = useHistory();
     const location = useLocation();
-    //test
+
     const from: any  = location.state || { from: { pathname: '/' } };
 
     const INITIAL_USER_DATA = {
@@ -38,14 +38,12 @@ const Login = (props) => {
         setButtonDisabled(true);
         await AuthService.signin(userData)
             .then(() => {
-                //test
                 history.replace(from);
         })
             .catch(error => console.log(error));
         setUserData(INITIAL_USER_DATA);
         setLoading(false);
         setButtonDisabled(false);
-        //test
         history.push('/');
         window.location.reload();
     }

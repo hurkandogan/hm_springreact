@@ -15,12 +15,10 @@ import static com.hugos.hm.security.UserRoles.*;
 public class AppUserDetailsService implements UserDetailsService {
 
     private final UserRepo userRepo;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public AppUserDetailsService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
