@@ -4,6 +4,7 @@ import com.hugos.hm.model.User;
 import com.hugos.hm.services.RegisterService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +19,8 @@ public class RegisterController {
     }
 
     @PostMapping
-    //@PreAuthorize("hasAnyRole('ROLE_SUPERADMIN')")
-    public String createUser(User user){
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN')")
+    public String createUser(@RequestBody User user){
         return registerService.createUser(user);
     }
 }

@@ -36,6 +36,9 @@ body {
     height: 1.5rem;
     margin-left: 10px;
 }
+.register-user-form{
+    padding: 50px;
+}
 
 /*Sidebar*/
 .copyright-text {
@@ -94,6 +97,10 @@ body {
 }
 .error {
     border: 2px solid #FF0000;
+}
+.error:focus{
+    border-color: #FF0000;
+    box-shadow: 0 0 0 0.25rem rgb(255 0 0 / 35%);
 }
 .edit-form-btn{
     max-width: 100%;

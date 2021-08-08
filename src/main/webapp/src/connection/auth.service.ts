@@ -1,14 +1,5 @@
 import api from './common_http';
 
-const register = (firstName, lastName, mail, password) => {
-  return api.post( "/api/signup", {
-      firstName,
-      lastName,
-      mail,
-      password
-    });
-};
-
 const signin = (data) => {
     return api.post("/login", data)
         .then((response) => {
@@ -16,8 +7,10 @@ const signin = (data) => {
                 const user = {
                     firstName: response.headers.firstname,
                     lastName: response.headers.lastname,
-                    token: response.headers.authorization
+                    token: response.headers.authorization,
+                    role: response.headers.role
                 }
+                console.log(response);
                 localStorage.setItem("user", JSON.stringify(user));
             }
         })
@@ -35,7 +28,6 @@ const getCurrentUser = () => {
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
     signin,
-    register,
     signout,
     getCurrentUser
 };

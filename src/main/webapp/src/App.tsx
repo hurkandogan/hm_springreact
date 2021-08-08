@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
     HashRouter as Router,
     Switch,
@@ -12,6 +12,7 @@ import Sidebar from "./components/shared/Sidebar";
 import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 import Location from "./components/location/Location";
+import Register from "./components/auth/Register";
 
 import { AppState } from './redux';
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,31 +27,37 @@ function App() {
     useEffect(() => {
         dispatch(loadUser());
         dispatch(loadLocations());
-    }, [])
+    }, [dispatch])
 
     return (
         <Router>
             <div>
-                { user.token && <TopNav /> }
-                { user.token && <Sidebar /> }
-                
+                {user.token && <TopNav />}
+                {user.token && <Sidebar />}
+
                 <div className="switch-wrapper">
                     <Switch>
                         <Route exact path={'/login'} component={Login} />
-                        
+
                         <PrivateRoute exact path={"/"}>
-                            <Dashboard />    
+                            <Dashboard />
                         </PrivateRoute>
 
                         <PrivateRoute path={'/artwork'}>
                             <Artwork />
                         </PrivateRoute>
+
                         <PrivateRoute path={'/location/:locationId'}>
                             <Location />
                         </PrivateRoute>
+
+                        <PrivateRoute path={'/register'}>
+                            <Register />
+                        </PrivateRoute>
+
                     </Switch>
-                </div> 
-            </div> 
+                </div>
+            </div>
         </Router>
     );
 }

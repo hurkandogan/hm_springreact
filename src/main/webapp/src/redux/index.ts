@@ -1,8 +1,4 @@
-import {
-    applyMiddleware,
-    createStore,
-    combineReducers
-} from 'redux';
+import { combineReducers } from 'redux';
 
 import { locationReducer } from './reducers/locationsReducer';
 import { userReducer } from './reducers/userReducer';

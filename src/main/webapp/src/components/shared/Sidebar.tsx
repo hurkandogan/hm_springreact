@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
     FaSearch,
@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 const Sidebar = () => {
 
     const getLocations = useSelector((state: AppState) => state.locations.locations);
-    const loggedUser  = useSelector((state : AppState) => state.user.user);
+    const loggedUser = useSelector((state: AppState) => state.user.user);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -26,9 +26,9 @@ const Sidebar = () => {
 
             <div className="sidebar">
                 <div className="user-panel mb-3 d-flex">
-                <div className="image">
-                    <img src={avatar} alt="Avatar" className="img-circle elevation-2" />
-            	</div> 
+                    <div className="image">
+                        <img src={avatar} alt="Avatar" className="img-circle elevation-2" />
+                    </div>
                     <div className="info">
                         <p className="user-info">{loggedUser.firstName + " " + loggedUser.lastName}</p>
                     </div>
@@ -95,6 +95,15 @@ const Sidebar = () => {
                             );
                         })
                         }
+                        <li className="nav-header">Admin Panel</li>
+                        <li className="nav-item">
+                            <NavLink to={"/register"}
+                                className="nav-link"
+                                activeClassName="active">
+                                <BsShield />
+                                <p>Create New User</p>
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
             </div>
