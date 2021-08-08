@@ -5,7 +5,6 @@ import {
     Route
 } from "react-router-dom";
 
-// Components
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import Login from "./components/auth/Login";
 import TopNav from "./components/shared/TopNav";
@@ -14,24 +13,26 @@ import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 import Location from "./components/location/Location";
 
-import { useAppSelector, useAppDispatch } from './redux/hooks';
-import { loadUser } from './redux/actions/user';
+import { AppState } from './redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadUser } from './redux/actions/userAction';
+import { loadLocations } from './redux/actions/locationsAction';
 
 function App() {
 
-    const loggedUser = useAppSelector(state => state.loggedUser.loggedUser);
-    const dispatch = useAppDispatch();
+    const user = useSelector((state: AppState) => state.user.user);
+    const dispatch = useDispatch();
 
-    
     useEffect(() => {
         dispatch(loadUser());
-    }, [dispatch])
+        dispatch(loadLocations());
+    }, [])
 
     return (
         <Router>
             <div>
-                { loggedUser.token && <TopNav /> }
-                { loggedUser.token && < Sidebar /> }
+                { user.token && <TopNav /> }
+                { user.token && <Sidebar /> }
                 
                 <div className="switch-wrapper">
                     <Switch>

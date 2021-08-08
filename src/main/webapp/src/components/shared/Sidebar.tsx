@@ -12,21 +12,12 @@ import {
 } from 'react-icons/bs';
 import avatar from '../../sample_avatar.png';
 
-import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { loadLocations } from '../../redux/actions/locations';
-
+import { AppState } from '../../redux';
+import { useSelector } from 'react-redux';
 const Sidebar = () => {
 
-    const dispatch = useAppDispatch();
-
-    const getLocations = useAppSelector(state => state.locations.locations);
-    const loggedUser  = useAppSelector(state => state.loggedUser.loggedUser);
-    
-
-
-    useEffect(() => {
-        dispatch(loadLocations());
-    }, [dispatch]);
+    const getLocations = useSelector((state: AppState) => state.locations.locations);
+    const loggedUser  = useSelector((state : AppState) => state.user.user);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
