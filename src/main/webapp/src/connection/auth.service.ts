@@ -1,6 +1,6 @@
 import api from './common_http';
 
-const signin = (data) => {
+const signin = async (data: any) => {
     return api.post("/login", data)
         .then((response) => {
             if (response.headers.authorization) {
@@ -10,7 +10,6 @@ const signin = (data) => {
                     token: response.headers.authorization,
                     role: response.headers.role
                 }
-                console.log(response);
                 localStorage.setItem("user", JSON.stringify(user));
             }
         })

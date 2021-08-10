@@ -1,6 +1,5 @@
 package com.hugos.hm.security.auth;
 
-import com.hugos.hm.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,23 +12,25 @@ public class AppUser implements UserDetails {
     private final String firstName;
     private final String lastName;
     private final Set<? extends GrantedAuthority> grantedAuthorities;
+    private final String role;
     private final boolean isAccountNonExpired;
     private final boolean isAccountNonLocked;
     private final boolean isCredentialsNonExpired;
     private final boolean isEnabled;
 
     public AppUser(String username,
-                           String password,
-                           String firstName, String lastName, Set<? extends GrantedAuthority> grantedAuthorities,
-                           boolean isAccountNonExpired,
-                           boolean isAccountNonLocked,
-                           boolean isCredentialsNonExpired,
-                           boolean isEnabled) {
+                   String password,
+                   String firstName, String lastName, Set<? extends GrantedAuthority> grantedAuthorities,
+                   String role, boolean isAccountNonExpired,
+                   boolean isAccountNonLocked,
+                   boolean isCredentialsNonExpired,
+                   boolean isEnabled) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.grantedAuthorities = grantedAuthorities;
+        this.role = role;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
@@ -76,6 +77,9 @@ public class AppUser implements UserDetails {
     }
     public String getLastName(){
         return lastName;
+    }
+    public String getRole() {
+        return role;
     }
 
     @Override

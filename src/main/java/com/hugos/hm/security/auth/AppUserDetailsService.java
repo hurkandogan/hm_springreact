@@ -33,6 +33,7 @@ public class AppUserDetailsService implements UserDetailsService {
                 user.getFirstName(),
                 user.getLastName(),
                 SUPERADMIN.getGrantedAuthorities(),
+                user.getRole(),
                 true,
                 true,
                 true,

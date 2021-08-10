@@ -14,10 +14,11 @@ import avatar from '../../sample_avatar.png';
 
 import { AppState } from '../../redux';
 import { useSelector } from 'react-redux';
-const Sidebar = () => {
+
+const Sidebar = (props: any) => {
 
     const getLocations = useSelector((state: AppState) => state.locations.locations);
-    const loggedUser = useSelector((state: AppState) => state.user.user);
+    const user = useSelector((state: AppState) => state.user.user);
 
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
@@ -30,7 +31,7 @@ const Sidebar = () => {
                         <img src={avatar} alt="Avatar" className="img-circle elevation-2" />
                     </div>
                     <div className="info">
-                        <p className="user-info">{loggedUser.firstName + " " + loggedUser.lastName}</p>
+                        <p className="user-info">{user.firstName + " " + user.lastName}</p>
                     </div>
                 </div>
 
@@ -50,6 +51,7 @@ const Sidebar = () => {
                         <li className="nav-header">General</li>
                         <li className="nav-item menu-open">
                             <NavLink to={"/"}
+                                exact={true}
                                 className="nav-link"
                                 activeClassName="active">
                                 <FaTachometerAlt />
@@ -95,15 +97,19 @@ const Sidebar = () => {
                             );
                         })
                         }
-                        <li className="nav-header">Admin Panel</li>
-                        <li className="nav-item">
-                            <NavLink to={"/register"}
-                                className="nav-link"
-                                activeClassName="active">
-                                <BsShield />
-                                <p>Create New User</p>
-                            </NavLink>
-                        </li>
+                        {user.role === "SUPERADMIN" &&
+                            <div>
+                                <li className="nav-header">Admin Panel</li>
+                                <li className="nav-item">
+                                    <NavLink to={"/register"}
+                                        className="nav-link"
+                                        activeClassName="active">
+                                        <BsShield />
+                                        <p>Create New User</p>
+                                    </NavLink>
+                                </li>
+                            </div>
+                        }
                     </ul>
                 </nav>
             </div>

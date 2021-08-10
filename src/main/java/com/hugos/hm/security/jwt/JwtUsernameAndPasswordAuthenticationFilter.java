@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.crypto.SecretKey;
@@ -15,8 +16,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Stream;
 
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -67,6 +71,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 jwtConfig.getTokenPrefix() + token);
         response.addHeader("firstName", user.getFirstName() );
         response.addHeader("lastName", user.getLastName() );
-        response.addHeader("role", user.getAuthorities().toString());
+        response.addHeader("role", user.getRole());
     }
 }
