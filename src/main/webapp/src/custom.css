@@ -40,6 +40,16 @@ body {
     padding: 50px;
 }
 
+/*AlertBox*/
+.alert-wrapper{
+    position: fixed;
+    top: 65px;
+    right: 10px;
+    z-index: 10;
+}
+.toast {
+    background-color: rgba(255, 255, 255, 1);
+}
 /*Sidebar*/
 .copyright-text {
     color: #FFF;

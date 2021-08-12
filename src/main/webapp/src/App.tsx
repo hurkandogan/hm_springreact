@@ -13,6 +13,7 @@ import Dashboard from "./components/content/Dashboard";
 import Artwork from "./components/artwork/Artwork";
 import Location from "./components/location/Location";
 import Register from "./components/auth/Register";
+import AlertBox from "./components/alert/AlertBox";
 
 import { AppState } from './redux';
 import { useSelector, useDispatch } from 'react-redux';
@@ -57,6 +58,7 @@ function App() {
 
                     </Switch>
                 </div>
+                <AlertBox />
             </div>
         </Router>
     );

@@ -6,6 +6,9 @@ import authService from '../../connection/auth.service';
 import ArtworkHeader from './ArtworkHeader';
 import ArtworkTableBody from './ArtworkTableBody';
 
+import { useDispatch } from 'react-redux';
+import { showAlertAction } from "../../redux/actions/alertAction";
+
 const Artwork = () => {
 
     const [artworks, setArtworks] = useState<any[]>([]);
@@ -14,8 +17,11 @@ const Artwork = () => {
     const [offCanvasArtworkDetailToggle, setOffCanvasArtworkDetailToggle] = useState(false);
     const [selectedArtwork, setSelectedArtwork] = useState({} || null);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         getArtworks();
+        dispatch(showAlertAction("Works", "Warning", true));
     }, []);
 
     const getArtworks = () => {
