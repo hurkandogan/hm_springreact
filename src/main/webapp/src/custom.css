@@ -43,7 +43,7 @@ body {
 /*AlertBox*/
 .alert-wrapper{
     position: fixed;
-    top: 65px;
+    bottom: 65px;
     right: 10px;
     z-index: 10;
 }

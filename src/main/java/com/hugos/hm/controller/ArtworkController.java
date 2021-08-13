@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,19 +35,19 @@ public class ArtworkController {
 
     @PostMapping()
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
-    public void insert(@RequestBody Artwork artwork){
-        artworkService.insertArtwork(artwork);
+    public Map<String, Object> insert(@RequestBody Artwork artwork){
+        return artworkService.insertArtwork(artwork);
     }
 
     @PutMapping()
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
-    public void update(@RequestBody Artwork artwork){
-        artworkService.updateArtwork(artwork);
+    public Map<String, Object> update(@RequestBody Artwork artwork){
+        return artworkService.updateArtwork(artwork);
     }
 
     @DeleteMapping ("/{artworkId}")
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
-    public String delete(@PathVariable("artworkId") Long id){
+    public Map<String, Object> delete(@PathVariable("artworkId") Long id){
         return artworkService.deleteArtwork(id);
     }
 }

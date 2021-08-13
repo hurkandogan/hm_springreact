@@ -21,7 +21,6 @@ const Artwork = () => {
 
     useEffect(() => {
         getArtworks();
-        dispatch(showAlertAction("Works", "Warning", true));
     }, []);
 
     const getArtworks = () => {
@@ -31,6 +30,7 @@ const Artwork = () => {
                 if (response.status !== 200) {
                     authService.signout();
                     window.location.reload();
+                    return;
                 }
                 setArtworks(response.data);
             })
@@ -53,7 +53,17 @@ const Artwork = () => {
     const editSelectedArtwork = () => {
         setLoading(true);
         api.put('/api/artwork', selectedArtwork)
-            .then(response => console.log(response))
+            .then(response => {
+                if (response.status !== 200) {
+                    authService.signout();
+                    window.location.reload();
+                    return;
+                }
+                const alert = response.data.alert;
+                if (alert) {
+                    dispatch(showAlertAction(alert.message, alert.alertType, true));
+                }
+            })
             .catch(err => console.log(err));
         setSelectedArtwork({});
         setOffCanvasArtworkDetailToggle(!offCanvasArtworkDetailToggle);

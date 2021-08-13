@@ -1,12 +1,15 @@
 package com.hugos.hm.services;
 
+import com.hugos.hm.model.Alert;
 import com.hugos.hm.model.Artwork;
 import com.hugos.hm.repository.ArtworkRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -31,40 +34,92 @@ public class ArtworkService {
         return artworkRepo.findById(id);
     }
 
-    public void insertArtwork(Artwork artwork){
-        artworkRepo.save(artwork);
+    public Map<String, Object> insertArtwork(Artwork artwork){
+        Map<String, Object> map = new HashMap<>();
+        Alert alert;
+        try{
+            artworkRepo.save(artwork);
+            alert = new Alert(
+                    "New artwork saved successfully!",
+                    "success"
+            );
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+            alert = new Alert(
+                    "An error occured: " + e.getMessage(),
+                    "success"
+            );
+        }
+        map.put("alert", alert);
+        return map;
     }
 
-    public String deleteArtwork(Long artworkId){
+    public Map<String, Object> deleteArtwork(Long artworkId){
+        Map<String, Object> map = new HashMap<>();
+        Alert alert;
         Optional<Artwork> artwork = artworkRepo.findById(artworkId);
         if(artwork.isPresent()){
             Artwork artworkData = artwork.get();
-            artworkData.setIsDeleted();
-            artworkRepo.flush();
-            return artworkData.getArtworkName() +
-                    " is deleted successfully.";
+            try{
+                artworkData.setIsDeleted();
+                artworkRepo.flush();
+                alert = new Alert(
+                        artworkData.getArtworkName() + " is deleted successfully.",
+                        "success"
+                );
+            }catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                alert = new Alert(
+                        "There is an error occurred. Please contact admin. Error: " + e.getMessage(),
+                        "error"
+                );
+            }
         } else {
-            return "Artwork with this id "+ artworkId +" is not found.";
+            alert = new Alert(
+                    "Artwork with this id "+ artworkId +" is not found. Please contact admin!",
+                    "error"
+            );
         }
+        map.put("alert", alert);
+        return map;
     }
 
     @Transactional
-    public void updateArtwork(Artwork artwork){
-        System.out.println(artwork.getId());
-        Artwork artworkOptional = artworkRepo.findById(artwork.getId())
-                .orElseThrow(() -> new IllegalStateException((
-                        "Artwork with this id: " + artwork.getId() + " is not found!"
-                        )));
-        // TODO: Check if they are the same with old data
-        artworkOptional.setArtistName(artwork.getArtistName());
-        artworkOptional.setPurchaseDate(artwork.getPurchaseDate());
-        artworkOptional.setDescription(artwork.getDescription());
-        artworkOptional.setFraming(artwork.getFraming());
-        artworkOptional.setImageLink(artwork.getImageLink());
-        artworkOptional.setArtworkName(artwork.getArtworkName());
-        artworkOptional.setPrice(artwork.getPrice());
-        artworkOptional.setSizes(artwork.getSizes());
-        artworkOptional.setTaxPrice(artwork.getTaxPrice());
-        artworkOptional.setTransportPrice(artwork.getTransportPrice());
+    public Map<String, Object> updateArtwork(Artwork artwork){
+        Map<String, Object> map = new HashMap<>();
+        Alert alert;
+        try{
+            Optional<Artwork> artworkOptional = artworkRepo.findById(artwork.getId());
+            if(artworkOptional.isPresent()) {
+                Artwork artworkOptionalData = artworkOptional.get();
+                artworkOptionalData.setArtistName(artwork.getArtistName());
+                artworkOptionalData.setPurchaseDate(artwork.getPurchaseDate());
+                artworkOptionalData.setDescription(artwork.getDescription());
+                artworkOptionalData.setFraming(artwork.getFraming());
+                artworkOptionalData.setImageLink(artwork.getImageLink());
+                artworkOptionalData.setArtworkName(artwork.getArtworkName());
+                artworkOptionalData.setPrice(artwork.getPrice());
+                artworkOptionalData.setSizes(artwork.getSizes());
+                artworkOptionalData.setTaxPrice(artwork.getTaxPrice());
+                artworkOptionalData.setTransportPrice(artwork.getTransportPrice());
+                alert = new Alert(
+                        "Changes saved successfully.",
+                        "success"
+                );
+            }else{
+                alert = new Alert(
+                        "Artwork with this id: " + artwork.getId() + " is not found! Please contact admin.",
+                        "error"
+                );
+            }
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+            alert = new Alert(
+                    "There is an error occurred. Please contact admin. Error: " + e.getMessage(),
+                    "error"
+            );
+        }
+        map.put("alert", alert);
+        return map;
     }
 }
