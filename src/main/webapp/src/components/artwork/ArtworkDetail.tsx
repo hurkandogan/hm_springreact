@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import api from '../../connection/common_http';
 
+import { useDispatch } from 'react-redux';
+import { showAlertAction } from "../../redux/actions/alertAction";
+
 const ArtworkDetail = (props) => {
+
+    const dispatch = useDispatch();
 
     const [showEditForm, setShowEditForm] = useState(false);
 
@@ -26,6 +31,8 @@ const ArtworkDetail = (props) => {
         api.delete(`/api/artwork/${artworkId}`)
             .then(response => {
                 console.log(response);
+                const alert = response.data.alert;
+                dispatch(showAlertAction(alert.message, alert.alertType));
                 handleOnClose();
             })
             .catch(error => console.log(error));
@@ -55,7 +62,7 @@ const ArtworkDetail = (props) => {
                         <input type="hidden"
                             id="id"
                             name="id"
-                            value={props.selectedArtwork.id ?? ""}
+                            value={props.selectedArtwork.id}
                             readOnly />
                         <div className="row mt-3">
                             <div className="col">
@@ -66,7 +73,7 @@ const ArtworkDetail = (props) => {
                                     id="artworkName"
                                     placeholder="Artwork Name"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.artworkName ?? ""}
+                                    value={props.selectedArtwork.artworkName}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -77,7 +84,7 @@ const ArtworkDetail = (props) => {
                                     id="artistName"
                                     placeholder="Artist Name"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.artistName ?? ""}
+                                    value={props.selectedArtwork.artistName}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                         </div>
@@ -90,7 +97,7 @@ const ArtworkDetail = (props) => {
                                     id="sizes"
                                     placeholder="Sizes"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.sizes ?? ""}
+                                    value={props.selectedArtwork.sizes}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -101,7 +108,18 @@ const ArtworkDetail = (props) => {
                                     id="location"
                                     placeholder="Location"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.location ?? ""}
+                                    value={props.selectedArtwork.location}
+                                    onChange={props.editSelectedArtworkHandler} />
+                            </div>
+                            <div className="col">
+                                <label htmlFor="folderNumber">Folder Number</label>
+                                <input type="text"
+                                    className="form-control"
+                                    name="folderNumber"
+                                    id="folderNumber"
+                                    placeholder="Folder number index"
+                                    autoComplete="off"
+                                    value={props.selectedArtwork.folderNumber}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                         </div>
@@ -114,7 +132,7 @@ const ArtworkDetail = (props) => {
                                     id="purchaseDate"
                                     placeholder="Purchase Date"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.purchaseDate ?? ""}
+                                    value={props.selectedArtwork.purchaseDate}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -125,7 +143,7 @@ const ArtworkDetail = (props) => {
                                     id="purchaseLocation"
                                     placeholder="Location of purchase"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.purchaseLocation ?? ""}
+                                    value={props.selectedArtwork.purchaseLocation}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                         </div>
@@ -138,7 +156,7 @@ const ArtworkDetail = (props) => {
                                     id="price"
                                     placeholder="Price in €"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.price ?? ""}
+                                    value={props.selectedArtwork.price}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -149,7 +167,7 @@ const ArtworkDetail = (props) => {
                                     id="taxPrice"
                                     placeholder="Tax"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.taxPrice ?? ""}
+                                    value={props.selectedArtwork.taxPrice}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -160,7 +178,7 @@ const ArtworkDetail = (props) => {
                                     id="transportPrice"
                                     placeholder="Transport"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.transportPrice ?? ""}
+                                    value={props.selectedArtwork.transportPrice}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                         </div>
@@ -173,7 +191,7 @@ const ArtworkDetail = (props) => {
                                     id="framing"
                                     placeholder="Transport"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.framing ?? ""}
+                                    value={props.selectedArtwork.framing}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -183,7 +201,7 @@ const ArtworkDetail = (props) => {
                                     id="arr"
                                     placeholder="ARR"
                                     autoComplete="off"
-                                    value={props.selectedArtwork.arr ?? ""}
+                                    value={props.selectedArtwork.arr}
                                     onChange={props.editSelectedArtworkHandler}>
                                     <option value={'false'}>No</option>
                                     <option value={'true'}>Yes</option>
@@ -196,7 +214,7 @@ const ArtworkDetail = (props) => {
                                 <textarea className="form-control"
                                     name="description"
                                     id="description"
-                                    value={props.selectedArtwork.description ?? ""}
+                                    value={props.selectedArtwork.description}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                             <div className="col">
@@ -204,7 +222,7 @@ const ArtworkDetail = (props) => {
                                 <textarea className="form-control"
                                     name="notes"
                                     id="notes"
-                                    value={props.selectedArtwork.notes ?? ""}
+                                    value={props.selectedArtwork.notes}
                                     onChange={props.editSelectedArtworkHandler} />
                             </div>
                         </div>
@@ -243,70 +261,77 @@ const ArtworkDetail = (props) => {
             ) : (
                 <div>
                     <div className="container">
-                        <img src="https://picsum.photos/100/100"
-                            alt={props.selectedArtwork.artworkName ?? ""} />
+                        <div className="row">
+                            <div className="col-2">
+                                <img src="https://picsum.photos/100/100"
+                                    alt={props.selectedArtwork.artworkName} />
+                            </div>
+                            <div className="col-3">
+                                <p>Folder Number: {props.selectedArtwork.folderNumber}</p>
+                            </div>
+                        </div>
                         <div className="row mt-3">
                             <div className="col">
                                 <h5>Artwork Name:</h5>
-                                <p className="detail-text">{props.selectedArtwork.artworkName ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.artworkName}</p>
                             </div>
                             <div className="col">
                                 <h5>Artist Name:</h5>
-                                <p className="detail-text">{props.selectedArtwork.artistName ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.artistName}</p>
                             </div>
                         </div>
                         <div className="row mt-3">
                             <div className="col">
                                 <h5>Sizes:</h5>
-                                <p className="detail-text">{props.selectedArtwork.sizes ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.sizes}</p>
                             </div>
                             <div className="col">
                                 <h5>Location:</h5>
-                                <p className="detail-text">{props.selectedArtwork.location ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.location}</p>
                             </div>
                         </div>
                         <div className="row mt-3">
                             <div className="col">
                                 <h5>Purchase Date:</h5>
-                                <p className="detail-text">{props.selectedArtwork.purchaseDate ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.purchaseDate}</p>
                             </div>
                             <div className="col">
                                 <h5>Purchase Date:</h5>
-                                <p className="detail-text">{props.selectedArtwork.purchaseLocation ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.purchaseLocation}</p>
                             </div>
                         </div>
                         <div className="row mt-3">
                             <div className="col">
                                 <h5>Price in €:</h5>
-                                <p className="detail-text">{props.selectedArtwork.price ?? 0.00}</p>
+                                <p className="detail-text">{props.selectedArtwork.price}</p>
                             </div>
                             <div className="col">
                                 <h5>Tax:</h5>
-                                <p className="detail-text">{props.selectedArtwork.taxPrice ?? 0.00}</p>
+                                <p className="detail-text">{props.selectedArtwork.taxPrice}</p>
                             </div>
                             <div className="col">
                                 <h5>Transport Cost:</h5>
-                                <p className="detail-text">{props.selectedArtwork.transportPrice ?? 0.00}</p>
+                                <p className="detail-text">{props.selectedArtwork.transportPrice}</p>
                             </div>
                         </div>
                         <div className="row mt-3">
                             <div className="col">
                                 <h5>Framing Cost:</h5>
-                                <p className="detail-text">{props.selectedArtwork.framing ?? 0.00}</p>
+                                <p className="detail-text">{props.selectedArtwork.framing}</p>
                             </div>
                             <div className="col">
                                 <h5>ARR:</h5>
-                                <p className="detail-text">{props.selectedArtwork.arr ?? ""}</p>
+                                <p className="detail-text">{props.selectedArtwork.arr}</p>
                             </div>
                         </div>
                         <div className="row mt-3">
                             <div className="col">
                                 <h5>Artwork Description:</h5>
-                                <p className="detail-text">{props.selectedArtwork.description ?? 0.00}</p>
+                                <p className="detail-text">{props.selectedArtwork.description}</p>
                             </div>
                             <div className="col">
                                 <h5>Notes:</h5>
-                                <p className="detail-text">{props.selectedArtwork.notes ?? 0.00}</p>
+                                <p className="detail-text">{props.selectedArtwork.notes}</p>
                             </div>
                         </div>
                     </div>

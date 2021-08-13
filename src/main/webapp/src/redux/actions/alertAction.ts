@@ -2,14 +2,13 @@ import Alert from "../../components/types/Alert";
 
 export const showAlertAction = (
     msg: string,
-    alertType: string,
-    show: boolean
+    alertType: string
 ) => (dispatch: any) => {
     dispatch({
         msg: msg,
         alertType: alertType,
         type: "SHOW_ALERT",
-        show: show
+        show: true
     } as Alert );
 }
 

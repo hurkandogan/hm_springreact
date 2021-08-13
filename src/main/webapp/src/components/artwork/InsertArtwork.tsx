@@ -5,20 +5,29 @@ import { artworkValidation } from './ArtworkFieldValidation';
 
 import { slide as Menu } from 'react-burger-menu';
 
+import { useDispatch } from 'react-redux';
+import { showAlertAction } from "../../redux/actions/alertAction";
+
 const InsertArtwork = (props) => {
+
+    const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(false);
     const [artwork,
         artworkChangeHandler,
         pricesChangeHandler,
         clearState] = InsertArtworkHook();
-    
+
     const submitArtwork = async (e: any) => {
         e.preventDefault();
         setLoading(true);
         if (artworkValidation(artwork)) {
             await api.post("/api/artwork", artwork)
-                .then(response => console.log(response))
+                .then(response => {
+                    console.log(response)
+                    const alert = response.data.alert;
+                    dispatch(showAlertAction(alert.message, alert.alertType));
+                })
                 .catch(err => console.error(err));
             clearState();
             props.getArtworks();
@@ -33,7 +42,7 @@ const InsertArtwork = (props) => {
             isOpen={props.offCanvasToggle}
             onClose={props.offCanvasHandler}
             right>
-            
+
             <h3>Add new Artwork</h3>
             <form onSubmit={submitArtwork}>
                 <div className="row mt-3">
@@ -81,6 +90,17 @@ const InsertArtwork = (props) => {
                             placeholder="Location"
                             autoComplete="off"
                             value={artwork.location}
+                            onChange={artworkChangeHandler} />
+                    </div>
+                    <div className="col">
+                        <label htmlFor="folderNumber">Folder Number</label>
+                        <input type="text"
+                            className="form-control"
+                            name="folderNumber"
+                            id="folderNumber"
+                            placeholder="Folder Number"
+                            autoComplete="off"
+                            value={artwork.folderNumber}
                             onChange={artworkChangeHandler} />
                     </div>
                 </div>

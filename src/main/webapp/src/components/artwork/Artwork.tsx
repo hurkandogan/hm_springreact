@@ -61,7 +61,7 @@ const Artwork = () => {
                 }
                 const alert = response.data.alert;
                 if (alert) {
-                    dispatch(showAlertAction(alert.message, alert.alertType, true));
+                    dispatch(showAlertAction(alert.message, alert.alertType));
                 }
             })
             .catch(err => console.log(err));

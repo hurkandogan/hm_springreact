@@ -9,7 +9,7 @@ import java.sql.Date;
 @Entity
 @Table(name="artworks")
 @SQLDelete(sql = "UPDATE artworks SET deleted = true WHERE id = ?")
-@Where(clause = "DELETED = false")
+@Where(clause = "deleted = false")
 public class Artwork {
     @Id
     @GeneratedValue
@@ -26,10 +26,13 @@ public class Artwork {
     private String sizes;
     private double taxPrice;
     private double transportPrice;
+    private int folderNumber;
     private boolean arr = false;
     private String notes;
     private boolean artworkIsSold = false;
-    private boolean isDeleted = false;
+
+    @Column(name="deleted")
+    private final boolean deleted = false;
 
     public Artwork() {}
 
@@ -165,11 +168,16 @@ public class Artwork {
         this.artworkIsSold = artworkIsSold;
     }
 
-    public boolean getIsDeleted() {
-        return isDeleted;
+    public int getFolderNumber() {
+        return folderNumber;
     }
-    public void setIsDeleted() {
-        this.isDeleted = true;
+
+    public void setFolderNumber(int folderNumber) {
+        this.folderNumber = folderNumber;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
     }
 
     @Override

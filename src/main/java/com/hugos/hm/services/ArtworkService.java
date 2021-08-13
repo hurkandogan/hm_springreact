@@ -22,28 +22,28 @@ public class ArtworkService {
         this.artworkRepo = artworkRepo;
     }
 
-    public Long getArtworkCount(){
+    public Long getArtworkCount() {
         return artworkRepo.count();
     }
 
-    public List<Artwork> getAllArtworks(){
+    public List<Artwork> getAllArtworks() {
         return artworkRepo.findAll();
     }
 
-    public Optional<Artwork> getOneArtwork(Long id){
+    public Optional<Artwork> getOneArtwork(Long id) {
         return artworkRepo.findById(id);
     }
 
-    public Map<String, Object> insertArtwork(Artwork artwork){
+    public Map<String, Object> insertArtwork(Artwork artwork) {
         Map<String, Object> map = new HashMap<>();
         Alert alert;
-        try{
+        try {
             artworkRepo.save(artwork);
             alert = new Alert(
-                    "New artwork saved successfully!",
+                    "New artwork is successfully saved!",
                     "success"
             );
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             alert = new Alert(
                     "An error occured: " + e.getMessage(),
@@ -54,43 +54,14 @@ public class ArtworkService {
         return map;
     }
 
-    public Map<String, Object> deleteArtwork(Long artworkId){
-        Map<String, Object> map = new HashMap<>();
-        Alert alert;
-        Optional<Artwork> artwork = artworkRepo.findById(artworkId);
-        if(artwork.isPresent()){
-            Artwork artworkData = artwork.get();
-            try{
-                artworkData.setIsDeleted();
-                artworkRepo.flush();
-                alert = new Alert(
-                        artworkData.getArtworkName() + " is deleted successfully.",
-                        "success"
-                );
-            }catch(Exception e){
-                System.out.println("Error: " + e.getMessage());
-                alert = new Alert(
-                        "There is an error occurred. Please contact admin. Error: " + e.getMessage(),
-                        "error"
-                );
-            }
-        } else {
-            alert = new Alert(
-                    "Artwork with this id "+ artworkId +" is not found. Please contact admin!",
-                    "error"
-            );
-        }
-        map.put("alert", alert);
-        return map;
-    }
-
+    //TODO: Change to patch instead put?
     @Transactional
-    public Map<String, Object> updateArtwork(Artwork artwork){
+    public Map<String, Object> updateArtwork(Artwork artwork) {
         Map<String, Object> map = new HashMap<>();
         Alert alert;
-        try{
+        try {
             Optional<Artwork> artworkOptional = artworkRepo.findById(artwork.getId());
-            if(artworkOptional.isPresent()) {
+            if (artworkOptional.isPresent()) {
                 Artwork artworkOptionalData = artworkOptional.get();
                 artworkOptionalData.setArtistName(artwork.getArtistName());
                 artworkOptionalData.setPurchaseDate(artwork.getPurchaseDate());
@@ -106,16 +77,36 @@ public class ArtworkService {
                         "Changes saved successfully.",
                         "success"
                 );
-            }else{
+            } else {
                 alert = new Alert(
                         "Artwork with this id: " + artwork.getId() + " is not found! Please contact admin.",
                         "error"
                 );
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             alert = new Alert(
                     "There is an error occurred. Please contact admin. Error: " + e.getMessage(),
+                    "error"
+            );
+        }
+        map.put("alert", alert);
+        return map;
+    }
+
+    public Map<String, Object> deleteArtwork(Long artworkId) {
+        Map<String, Object> map = new HashMap<>();
+        Alert alert;
+        try {
+            artworkRepo.deleteById(artworkId);
+            alert = new Alert(
+                    "Artwork ID: " + artworkId + " is deleted successfully.",
+                    "success"
+            );
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            alert = new Alert(
+                    "An error occurred. Please contact admin. Error: " + e.getMessage(),
                     "error"
             );
         }

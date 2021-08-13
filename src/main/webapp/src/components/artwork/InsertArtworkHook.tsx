@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ArtworkIF from '../types/Artwork';
+import Artwork from '../types/Artwork';
 
 export const InsertArtworkHook = () => {
 
@@ -17,19 +17,20 @@ export const InsertArtworkHook = () => {
         framing: 0,
         description: "",
         notes: "",
-    } as ArtworkIF);
+        folderNumber: 0,
+    } as Artwork);
 
-    const changeHandler = (event) : void => {
+    const changeHandler = (event): void => {
         const { name, value } = event.target;
         setArtwork({ ...artwork, [name]: value });
     };
 
-    const changeHandlerPrices = (e) : void => {
+    const changeHandlerPrices = (e): void => {
         const { name, value } = e.target;
         setArtwork({ ...artwork, [name]: value.replace(',', '.') });
     };
 
-    const clearState = () : void => {
+    const clearState = (): void => {
         setArtwork({
             artworkName: "",
             artistName: "",
@@ -44,11 +45,12 @@ export const InsertArtworkHook = () => {
             framing: 0,
             description: "",
             notes: "",
-        } as ArtworkIF);
+            folderNumber: 0,
+        } as Artwork);
     };
 
     return [artwork,
-            changeHandler,
-            changeHandlerPrices,
-            clearState] as const;
+        changeHandler,
+        changeHandlerPrices,
+        clearState] as const;
 };
