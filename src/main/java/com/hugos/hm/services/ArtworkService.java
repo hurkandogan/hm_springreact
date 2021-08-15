@@ -46,8 +46,8 @@ public class ArtworkService {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             alert = new Alert(
-                    "An error occured: " + e.getMessage(),
-                    "success"
+                    "An error occurred: " + e.getMessage(),
+                    "danger"
             );
         }
         map.put("alert", alert);

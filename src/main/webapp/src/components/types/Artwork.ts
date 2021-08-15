@@ -12,5 +12,6 @@ export default interface Artwork{
     framing?: number;
     description?: string;
     notes?: string;
+    artworkIsSold?: boolean;
     folderNumber?: number;
 }

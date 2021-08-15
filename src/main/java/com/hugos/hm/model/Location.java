@@ -1,10 +1,15 @@
 package com.hugos.hm.model;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name="locations")
+@SQLDelete(sql = "UPDATE artworks SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class Location {
 
     @Id
@@ -13,8 +18,12 @@ public class Location {
     private String name;
     private String shortName;
     private String address;
-    @OneToMany(mappedBy = "location")
-    private Set<Invoice> invoices;
+    private boolean isForHouse;
+    private boolean isForArtwork;
+
+    @Column(name="deleted")
+    private final boolean deleted = false;
+
 
     public Location() {}
 
@@ -22,12 +31,13 @@ public class Location {
         this.id = id;
     }
 
-    public Location(String name,
-                    String shortName,
-                    String address) {
+    public Location(Long id, String name, String shortName, String address, boolean isForHouse, boolean isForArtwork) {
+        this.id = id;
         this.name = name;
         this.shortName = shortName;
         this.address = address;
+        this.isForHouse = isForHouse;
+        this.isForArtwork = isForArtwork;
     }
 
     public Long getId() {
@@ -58,15 +68,23 @@ public class Location {
         return address;
     }
 
-    public void setAddress(String adress) {
-        this.address = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Set<Invoice> getInvoices() {
-        return invoices;
+    public boolean isForHouse() {
+        return isForHouse;
     }
 
-    public void setInvoices(Set<Invoice> invoices) {
-        this.invoices = invoices;
+    public void setForHouse(boolean forHouse) {
+        isForHouse = forHouse;
+    }
+
+    public boolean isForArtwork() {
+        return isForArtwork;
+    }
+
+    public void setForArtwork(boolean forArtwork) {
+        isForArtwork = forArtwork;
     }
 }

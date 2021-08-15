@@ -38,18 +38,6 @@ const Artwork = () => {
         setLoading(false);
     };
 
-    const offCanvasHandler = async () => setOffCanvasToggle(!offCanvasToggle);
-
-    const offCanvasArtworkDetailHandler = async (value) => {
-        setSelectedArtwork(value ?? {});
-        setOffCanvasArtworkDetailToggle(!offCanvasArtworkDetailToggle);
-    };
-
-    const editSelectedArtworkHandler = event => {
-        const { name, value } = event.target;
-        setSelectedArtwork({ ...selectedArtwork, [name]: value });
-    };
-
     const editSelectedArtwork = () => {
         setLoading(true);
         api.put('/api/artwork', selectedArtwork)
@@ -70,8 +58,20 @@ const Artwork = () => {
         setLoading(false);
     };
 
+    const offCanvasHandler = async () => setOffCanvasToggle(!offCanvasToggle);
+
+    const offCanvasArtworkDetailHandler = (value) => {
+        setSelectedArtwork(value ?? {});
+        setOffCanvasArtworkDetailToggle(!offCanvasArtworkDetailToggle);
+    };
+
+    const editSelectedArtworkHandler = event => {
+        const { name, value } = event.target;
+        setSelectedArtwork({ ...selectedArtwork, [name]: value });
+    };
+
     return (
-        <div className="content-wrapper">
+        <div>
 
             <InsertArtwork
                 offCanvasToggle={offCanvasToggle}

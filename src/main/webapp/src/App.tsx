@@ -5,6 +5,12 @@ import {
     Route
 } from "react-router-dom";
 
+import {
+    Container,
+    Row,
+    Col
+} from "react-bootstrap";
+
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import Login from "./components/auth/Login";
 import TopNav from "./components/shared/TopNav";
@@ -32,34 +38,43 @@ function App() {
 
     return (
         <Router>
-            <div>
-                {user.token && <TopNav />}
-                {user.token && <Sidebar />}
+            <Container fluid>
+                <Row>
+                    {user.token && <Sidebar />}
 
-                <div className="switch-wrapper">
-                    <Switch>
-                        <Route exact path={'/login'} component={Login} />
+                    <Col>
+                        {user.token && <TopNav />}
+                        <div className="switch-wrapper">
+                            <Switch>
+                                <div className="content-wrapper">
+                                    <Route exact path={'/login'} component={Login} />
 
-                        <PrivateRoute exact path={"/"}>
-                            <Dashboard />
-                        </PrivateRoute>
+                                    <PrivateRoute exact path={"/"}>
+                                        <Dashboard />
+                                    </PrivateRoute>
 
-                        <PrivateRoute path={'/artwork'}>
-                            <Artwork />
-                        </PrivateRoute>
+                                    <PrivateRoute path={'/artwork'}>
+                                        <Artwork />
+                                    </PrivateRoute>
 
-                        <PrivateRoute path={'/location/:locationId'}>
-                            <Location />
-                        </PrivateRoute>
+                                    <PrivateRoute path={'/location/:locationId'}>
+                                        <Dashboard />
+                                    </PrivateRoute>
 
-                        <PrivateRoute path={'/register'}>
-                            <Register />
-                        </PrivateRoute>
+                                    <PrivateRoute path={'/register'}>
+                                        <Register />
+                                    </PrivateRoute>
 
-                    </Switch>
-                </div>
-                <AlertBox />
-            </div>
+                                    <PrivateRoute path={'/locations'}>
+                                        <Location />
+                                    </PrivateRoute>
+                                </div>
+                            </Switch>
+                        </div>
+                    </Col>
+                    <AlertBox />
+                </Row>
+            </Container>
         </Router>
     );
 }

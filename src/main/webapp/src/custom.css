@@ -39,6 +39,12 @@ body {
 .register-user-form{
     padding: 50px;
 }
+.location-form-wrapper .col{
+    margin-bottom: 1rem;
+}
+.location-edit-btn{
+    text-align: center;
+}
 
 /*AlertBox*/
 .alert-wrapper{
@@ -51,6 +57,14 @@ body {
     background-color: rgba(255, 255, 255, 1);
 }
 /*Sidebar*/
+.layout-fixed .main-sidebar {
+    bottom: 0;
+    float: none;
+    left: 0;
+    position: static;
+    top: 0;
+    width: 280px;
+}
 .copyright-text {
     color: #FFF;
     text-align: center;

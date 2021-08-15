@@ -67,21 +67,13 @@ const Sidebar = (props: any) => {
                                 <p>Artworks</p>
                             </NavLink>
                         </li>
-                        <li className="nav-header">House Management (In Development)</li>
+                        <li className="nav-header">House Management(BETA)</li>
                         <li className="nav-item">
                             <NavLink to={"/versicherungen"}
                                 className="nav-link"
                                 activeClassName="active">
                                 <BsShield />
                                 <p>Versicherungen</p>
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to={"/renovierungskosten"}
-                                className="nav-link"
-                                activeClassName="active">
-                                <BsWrench />
-                                <p>Renovierungskosten</p>
                             </NavLink>
                         </li>
                         {getLocations.map(location => {
@@ -97,8 +89,17 @@ const Sidebar = (props: any) => {
                             );
                         })
                         }
+                        <li className="nav-header">Settings</li>
+                        <li className="nav-item">
+                            <NavLink to={"/locations"}
+                                className="nav-link"
+                                activeClassName="active">
+                                <BsShield />
+                                <p>Locations</p>
+                            </NavLink>
+                        </li>
                         {user.role === "SUPERADMIN" &&
-                            <div>
+                            <li> {/* TODO: hover is not working */}
                                 <li className="nav-header">Admin Panel</li>
                                 <li className="nav-item">
                                     <NavLink to={"/register"}
@@ -108,7 +109,7 @@ const Sidebar = (props: any) => {
                                         <p>Create New User</p>
                                     </NavLink>
                                 </li>
-                            </div>
+                            </li>
                         }
                     </ul>
                 </nav>
