@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="locations")
-@SQLDelete(sql = "UPDATE artworks SET deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE locations SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 public class Location {
 
@@ -22,7 +22,7 @@ public class Location {
     private boolean isForArtwork;
 
     @Column(name="deleted")
-    private final boolean deleted = false;
+    private boolean deleted = false;
 
 
     public Location() {}
@@ -31,7 +31,12 @@ public class Location {
         this.id = id;
     }
 
-    public Location(Long id, String name, String shortName, String address, boolean isForHouse, boolean isForArtwork) {
+    public Location(Long id,
+                    String name,
+                    String shortName,
+                    String address,
+                    boolean isForHouse,
+                    boolean isForArtwork) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
@@ -72,19 +77,32 @@ public class Location {
         this.address = address;
     }
 
-    public boolean isForHouse() {
+    public boolean getIsForHouse() {
         return isForHouse;
     }
 
-    public void setForHouse(boolean forHouse) {
-        isForHouse = forHouse;
+    public void setIsForHouse(boolean isForHouse) {
+        this.isForHouse = isForHouse;
     }
 
-    public boolean isForArtwork() {
+    public boolean getIsForArtwork() {
         return isForArtwork;
     }
 
-    public void setForArtwork(boolean forArtwork) {
-        isForArtwork = forArtwork;
+    public void setIsForArtwork(boolean isForArtwork) {
+        this.isForArtwork = isForArtwork;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", shortName='" + shortName + '\'' +
+                ", address='" + address + '\'' +
+                ", isForHouse=" + isForHouse +
+                ", isForArtwork=" + isForArtwork +
+                ", deleted=" + deleted +
+                '}';
     }
 }

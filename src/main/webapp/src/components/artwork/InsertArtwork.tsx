@@ -5,12 +5,15 @@ import { artworkValidation } from './ArtworkFieldValidation';
 
 import { slide as Menu } from 'react-burger-menu';
 
-import { useDispatch } from 'react-redux';
+import { AppState } from '../../redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showAlertAction } from "../../redux/actions/alertAction";
 
 const InsertArtwork = (props) => {
 
     const dispatch = useDispatch();
+
+    const locations = useSelector((state: AppState) => state.locations.locations);
 
     const [loading, setLoading] = useState(false);
     const [artwork,
@@ -83,14 +86,20 @@ const InsertArtwork = (props) => {
                     </div>
                     <div className="col">
                         <label htmlFor="location">Location</label>
-                        <input type="text"
-                            className="form-control"
+                        <select className="form-control"
                             name="location"
                             id="location"
                             placeholder="Location"
                             autoComplete="off"
                             value={artwork.location}
-                            onChange={artworkChangeHandler} />
+                            onChange={artworkChangeHandler}>
+                            {locations.filter(location => location.isForArtwork)
+                                .map(location =>
+                                    <option value={location.shortName}>
+                                        {location.shortName} | {location.name}
+                                    </option>
+                                )}
+                        </select>
                     </div>
                     <div className="col">
                         <label htmlFor="folderNumber">Folder Number</label>

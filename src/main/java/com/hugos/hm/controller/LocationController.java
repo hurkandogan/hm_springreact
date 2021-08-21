@@ -40,6 +40,7 @@ public class LocationController {
     @PutMapping
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ADMIN')")
     public Map<String, Object> edit(@RequestBody Location location){
+        System.out.println(location.toString());
         return locationService.editLocation(location);
     }
 

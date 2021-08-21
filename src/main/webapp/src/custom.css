@@ -46,12 +46,18 @@ body {
     text-align: center;
 }
 
+.location-listing-icons{
+    display: inline;
+    margin: 0 5px;
+    font-size: 1.5rem;
+}
+
 /*AlertBox*/
 .alert-wrapper{
     position: fixed;
     bottom: 65px;
     right: 10px;
-    z-index: 10;
+    z-index: 9999;
 }
 .toast {
     background-color: rgba(255, 255, 255, 1);

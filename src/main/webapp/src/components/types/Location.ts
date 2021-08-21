@@ -1,7 +1,5 @@
-import Invoice from './Invoice';
-
 export default interface Location {
-    id: number;
+    id?: number;
     name: string;
     shortName?: string;
     address?: string;

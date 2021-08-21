@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import api from '../../connection/common_http';
 
-import { useDispatch } from 'react-redux';
+import { AppState } from '../../redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showAlertAction } from "../../redux/actions/alertAction";
 
-const ArtworkDetail = (props) => {
+const ArtworkDetail = (props: any) => {
 
     const dispatch = useDispatch();
+    const locations = useSelector((state: AppState) => state.locations.locations);
 
     const [showEditForm, setShowEditForm] = useState(false);
 
@@ -102,14 +104,20 @@ const ArtworkDetail = (props) => {
                             </div>
                             <div className="col">
                                 <label htmlFor="location">Location</label>
-                                <input type="text"
-                                    className="form-control"
+                                <select className="form-control"
                                     name="location"
                                     id="location"
                                     placeholder="Location"
                                     autoComplete="off"
                                     value={props.selectedArtwork.location}
-                                    onChange={props.editSelectedArtworkHandler} />
+                                    onChange={props.editSelectedArtworkHandler}>
+                                    {locations.filter(location => location.isForArtwork)
+                                        .map(location =>
+                                            <option value={location.shortName}>
+                                                {location.shortName} | {location.name}
+                                            </option>
+                                        )}
+                                </select>
                             </div>
                             <div className="col">
                                 <label htmlFor="folderNumber">Folder Number</label>

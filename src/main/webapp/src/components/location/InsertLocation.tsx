@@ -10,10 +10,12 @@ import { slide as Menu } from 'react-burger-menu';
 
 
 import LocationIF from '../types/Location';
-
+import { useDispatch } from 'react-redux';
+import { showAlertAction } from "../../redux/actions/alertAction";
 
 const InsertLocation = (props: any) => {
 
+    const dispatch = useDispatch();
     const [newLocation, setNewLocation] = useState({} as LocationIF);
 
     const changeHandler = (event: any) => {
@@ -26,11 +28,18 @@ const InsertLocation = (props: any) => {
         setNewLocation({ ...newLocation, [name]: checked });
     };
 
+    const closeOffCanvasHandler = () => {
+        props.handleNewLocationCanvasClose();
+        setNewLocation({} as LocationIF);
+    }
+
     const onSubmit = (event: any) => {
         event.preventDefault();
-        api.post('/api/locations', newLocation)
+        api.post('/api/location', newLocation)
             .then(response => {
-                console.log(response);
+                const alert = response.data.alert;
+                dispatch(showAlertAction(alert.message, alert.type));
+                closeOffCanvasHandler();
             })
             .catch(err => {
                 console.log(err);
@@ -41,7 +50,7 @@ const InsertLocation = (props: any) => {
         <Menu
             width={'20%'}
             isOpen={props.newLocationForm}
-            onClose={props.handleNewLocationCanvasClose}
+            onClose={closeOffCanvasHandler}
             right
         >
             <div className="location-form-wrapper">

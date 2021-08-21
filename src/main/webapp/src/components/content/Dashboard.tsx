@@ -6,7 +6,8 @@ import authService from '../../connection/auth.service';
 const Dashboard = () => {
 
     const [data, setData] = useState({
-        artwork_count: ''
+        artwork_count: 0,
+        artwork_locations_count: 0,
     });
     const [loading, setLoading] = useState(false);
 
@@ -53,6 +54,18 @@ const Dashboard = () => {
                                                 <div className="inner">
                                                     <h3>{data.artwork_count ?? ''}</h3>
                                                     <p>Artwork Pieces</p>
+                                                </div>
+                                                {/* <div className="icon">
+                                        <i className="ion ion-bag"></i>
+                                    </div>
+                                    <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a> */}
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-3 col-6">
+                                            <div className="small-box bg-warning">
+                                                <div className="inner">
+                                                    <h3>{data.artwork_locations_count ?? ''}</h3>
+                                                    <p>Artwork Locations</p>
                                                 </div>
                                                 {/* <div className="icon">
                                         <i className="ion ion-bag"></i>

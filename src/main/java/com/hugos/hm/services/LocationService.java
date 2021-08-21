@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationService {
@@ -18,6 +19,15 @@ public class LocationService {
     @Autowired
     public LocationService(LocationRepo locationRepo){
         this.locationRepo = locationRepo;
+    }
+
+    public Long getArtworkLocationsCount() {
+        List<Location> locationList = locationRepo.findAll();
+        List<Location> filteredLocations = locationList
+                .stream()
+                .filter(Location::getIsForArtwork)
+                .collect(Collectors.toList());
+        return (long) filteredLocations.size();
     }
 
     public List<Location> getAllLocations(){
@@ -57,12 +67,13 @@ public class LocationService {
                 locationData.setName(location.getName());
                 locationData.setShortName(location.getShortName());
                 locationData.setAddress(location.getAddress());
-                locationData.setForHouse(location.isForHouse());
-                locationData.setForArtwork(location.isForArtwork());
+                locationData.setIsForHouse(location.getIsForHouse());
+                locationData.setIsForArtwork(location.getIsForArtwork());
                 alert = new Alert (
                         "Changes saved successfully!",
                         "success"
                 );
+                locationRepo.flush();
             }else{
                 alert = new Alert (
                         "Location is not found! Contact the system admin.",

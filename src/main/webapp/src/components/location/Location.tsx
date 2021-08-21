@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-import LocationHeader from './LocationHeader';
-import LocationEditForm from './LocationEditForm';
-import InsertLocation from './InsertLocation';
-
 import {
-    Accordion
-} from 'react-bootstrap';
+    BsCardImage,
+    BsHouseDoor
+} from 'react-icons/bs';
+
+import LocationHeader from './LocationHeader';
+import InsertLocation from './InsertLocation';
+import EditLocation from './EditLocation';
 
 import LocationIF from '../types/Location';
 import { AppState } from '../../redux';
@@ -16,36 +17,71 @@ import { useSelector } from 'react-redux';
 const Location = () => {
 
     const locations = useSelector((state: AppState) => state.locations.locations);
-    const [newLocationForm, setNewLocationForm] = useState<boolean>(false);
+    const [newLocationFormOffCanvas, setNewLocationFormOffCanvas] = useState<boolean>(false);
+    const [editLocationFormOffCanvas, setEditLocationFormOffCanvas] = useState<boolean>(false);
+    const [editedLocation, setEditedLocation] = useState({} as LocationIF);
 
-    const toggleNewLocationCanvas = (): void => {
-        setNewLocationForm(!newLocationForm);
+    const setSelectedEditedLocation = (location: LocationIF) => {
+        setEditedLocation(location);
+        toggleEditLocationCanvas();
     }
-
-    const mapLocations = locations.map((location: LocationIF, index: number): any => {
+    const toggleNewLocationCanvas = (): void => {
+        setNewLocationFormOffCanvas(!newLocationFormOffCanvas);
+    }
+    const toggleEditLocationCanvas = (): void => {
+        setEditLocationFormOffCanvas(!editLocationFormOffCanvas);
+    }
+    const closeEditLocationCanvas = (): void => {
+        setEditedLocation({} as LocationIF);
+    }
+    const editedLocationChangeHandler = (event: any) => {
+        const { name, value } = event.target;
+        if (editedLocation !== undefined) {
+            setEditedLocation({ ...editedLocation, [name]: value });
+        }
+    };
+    const editedLocationCheckboxChangeHandler = (event: any) => {
+        const { name, checked } = event.target;
+        if (editedLocation !== undefined) {
+            setEditedLocation({ ...editedLocation, [name]: checked });
+        }
+    };
+    const mapLocations: HTMLElement = locations.map((location: LocationIF, index: number): any => {
         return (
-            <Accordion.Item key={index} eventKey={"\"" + index + "\""}>
-                <Accordion.Header>{location.name}</Accordion.Header>
-                <Accordion.Body>
-                    <LocationEditForm location={location} />
-                </Accordion.Body>
-            </Accordion.Item>
+            <li key={index}
+                className="list-group-item list-group-item-action"
+                onClick={() => setSelectedEditedLocation(location)}>
+                <p>{location.isForHouse && <div className="location-listing-icons"><BsHouseDoor /></div>}
+                    {location.isForArtwork && <div className="location-listing-icons"><BsCardImage /></div>}
+                    {location.name} | {location.shortName}</p></li>
         );
     });
 
     return (
         <div>
             <InsertLocation
-                newLocationForm={newLocationForm}
+                newLocationForm={newLocationFormOffCanvas}
                 handleNewLocationCanvasClose={toggleNewLocationCanvas}
             />
+
+            <EditLocation
+                location={editedLocation}
+                editLocationForm={editLocationFormOffCanvas}
+                closeEditLocationCanvas={closeEditLocationCanvas}
+                toggleEditLocationCanvas={toggleEditLocationCanvas}
+                editedLocationChangeHandler={editedLocationChangeHandler}
+                editedLocationCheckboxChangeHandler={editedLocationCheckboxChangeHandler} />
+
             <LocationHeader
                 locationCount={locations.length}
                 toggleNewLocationCanvas={toggleNewLocationCanvas}
             />
-            <Accordion defaultActiveKey="0">
+
+            <ul className="list-group">
                 {mapLocations}
-            </Accordion>
+            </ul>
+            <p><BsHouseDoor />: Location for house expenses</p>
+            <p><BsCardImage />: Location for artworks</p>
         </div>
     );
 }

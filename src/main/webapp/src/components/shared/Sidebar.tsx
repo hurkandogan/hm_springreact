@@ -7,7 +7,6 @@ import {
 import {
     BsCircle,
     BsShield,
-    BsWrench,
     BsHouseDoor
 } from 'react-icons/bs';
 import avatar from '../../sample_avatar.png';
@@ -76,14 +75,14 @@ const Sidebar = (props: any) => {
                                 <p>Versicherungen</p>
                             </NavLink>
                         </li>
-                        {getLocations.map(location => {
+                        {getLocations.filter(location => location.isForHouse).map(location => {
                             return (
                                 <li className="nav-item" key={location.name}>
                                     <NavLink to={"/location/" + location.id}
                                         className="nav-link"
                                         activeClassName="active">
                                         <BsHouseDoor />
-                                        <p>{location.name}</p>
+                                        <p>{location.shortName} | {location.name}</p>
                                     </NavLink>
                                 </li>
                             );

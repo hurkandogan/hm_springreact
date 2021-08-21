@@ -32,7 +32,7 @@ public class Artwork {
     private boolean artworkIsSold = false;
 
     @Column(name="deleted")
-    private final boolean deleted = false;
+    private boolean deleted = false;
 
     public Artwork() {}
 
