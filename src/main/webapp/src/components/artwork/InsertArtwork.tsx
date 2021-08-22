@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import api from '../../connection/common_http';
+import api from '../connection/common_http';
 import { InsertArtworkHook } from './InsertArtworkHook';
 import { artworkValidation } from './ArtworkFieldValidation';
 
 import { slide as Menu } from 'react-burger-menu';
 
-import { AppState } from '../../redux';
+import { AppState } from '../redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { showAlertAction } from "../../redux/actions/alertAction";
+import { showAlertAction } from "../redux/actions/alertAction";
 
 const InsertArtwork = (props) => {
 

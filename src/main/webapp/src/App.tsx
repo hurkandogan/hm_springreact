@@ -21,10 +21,10 @@ import Location from "./components/location/Location";
 import Register from "./components/auth/Register";
 import AlertBox from "./components/alert/AlertBox";
 
-import { AppState } from './redux';
+import { AppState } from './components/redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadUser } from './redux/actions/userAction';
-import { loadLocations } from './redux/actions/locationsAction';
+import { loadUser } from './components/redux/actions/userAction';
+import { loadLocations } from './components/redux/actions/locationsAction';
 
 function App() {
 
@@ -58,6 +58,10 @@ function App() {
                                     </PrivateRoute>
 
                                     <PrivateRoute path={'/location/:locationId'}>
+                                        <Dashboard />
+                                    </PrivateRoute>
+
+                                    <PrivateRoute path={'/versicherungen'}>
                                         <Dashboard />
                                     </PrivateRoute>
 

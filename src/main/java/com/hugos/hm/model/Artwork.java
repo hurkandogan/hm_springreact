@@ -26,13 +26,14 @@ public class Artwork {
     private String sizes;
     private double taxPrice;
     private double transportPrice;
+    @Transient
+    private double totalPrice = 0;
     private int folderNumber;
     private boolean arr = false;
     private String notes;
     private boolean artworkIsSold = false;
-
     @Column(name="deleted")
-    private boolean deleted = false;
+    private final boolean deleted = false;
 
     public Artwork() {}
 
@@ -178,6 +179,14 @@ public class Artwork {
 
     public boolean isDeleted() {
         return deleted;
+    }
+
+    public double getTotalPrice() {
+        totalPrice = this.getPrice() +
+                this.getTaxPrice() +
+                this.getTransportPrice() +
+                this.getFraming();
+        return totalPrice;
     }
 
     @Override

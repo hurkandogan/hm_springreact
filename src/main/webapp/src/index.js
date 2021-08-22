@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import './custom.css';
 
 import { Provider } from 'react-redux';
-import { rootReducer } from './redux';
+import { rootReducer } from './components/redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 

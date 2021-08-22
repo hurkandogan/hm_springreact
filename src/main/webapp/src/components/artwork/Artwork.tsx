@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../connection/common_http';
+import api from '../connection/common_http';
 import InsertArtwork from './InsertArtwork';
 import ArtworkDetail from './ArtworkDetail';
-import authService from '../../connection/auth.service';
+import authService from '../connection/auth.service';
 import ArtworkHeader from './ArtworkHeader';
 import ArtworkTableBody from './ArtworkTableBody';
 
 import { useDispatch } from 'react-redux';
-import { showAlertAction } from "../../redux/actions/alertAction";
+import { showAlertAction } from "../redux/actions/alertAction";
 
 const Artwork = () => {
 

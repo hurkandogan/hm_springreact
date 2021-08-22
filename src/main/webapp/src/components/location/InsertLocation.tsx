@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../../connection/common_http';
+import api from '../connection/common_http';
 
 import {
     Form,
@@ -11,7 +11,8 @@ import { slide as Menu } from 'react-burger-menu';
 
 import LocationIF from '../types/Location';
 import { useDispatch } from 'react-redux';
-import { showAlertAction } from "../../redux/actions/alertAction";
+import { showAlertAction } from "../redux/actions/alertAction";
+import { loadLocations } from '../redux/actions/locationsAction';
 
 const InsertLocation = (props: any) => {
 
@@ -39,6 +40,7 @@ const InsertLocation = (props: any) => {
             .then(response => {
                 const alert = response.data.alert;
                 dispatch(showAlertAction(alert.message, alert.type));
+                dispatch(loadLocations());
                 closeOffCanvasHandler();
             })
             .catch(err => {

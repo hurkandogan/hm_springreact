@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 
-import Alert from '../components/types/Alert';
-import Location from '../components/types/Location';
+import Alert from '../types/Alert';
+//import User from '../components/types/User';
+//import Location from '../components/types/Location';
 
 import { locationReducer } from './reducers/locationsReducer';
 import { userReducer } from './reducers/userReducer';

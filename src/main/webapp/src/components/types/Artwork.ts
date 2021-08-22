@@ -14,4 +14,5 @@ export default interface Artwork{
     notes?: string;
     artworkIsSold?: boolean;
     folderNumber?: number;
+    totalPrice?: number;
 }

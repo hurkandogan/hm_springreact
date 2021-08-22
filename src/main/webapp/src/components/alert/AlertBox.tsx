@@ -2,8 +2,8 @@ import React from 'react';
 import {
     Toast
 } from "react-bootstrap";
-import { AppState } from '../../redux';
-import { hideAlertAction } from "../../redux/actions/alertAction";
+import { AppState } from '../redux';
+import { hideAlertAction } from "../redux/actions/alertAction";
 import { useSelector, useDispatch } from 'react-redux';
 
 const AlertBox = () => {

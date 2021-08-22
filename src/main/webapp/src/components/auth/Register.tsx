@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { registerValidation } from '../validation/RegisterFormValidation';
-import api from '../../connection/common_http';
+import api from '../connection/common_http';
 
 const Register = () => {
 

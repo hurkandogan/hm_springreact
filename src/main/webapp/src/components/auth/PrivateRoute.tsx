@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import authService from '../../connection/auth.service';
+import authService from '../connection/auth.service';
 
 export const PrivateRoute = ({ children, ...rest }) => {
     let user = authService.getCurrentUser();

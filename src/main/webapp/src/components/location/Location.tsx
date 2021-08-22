@@ -10,7 +10,7 @@ import InsertLocation from './InsertLocation';
 import EditLocation from './EditLocation';
 
 import LocationIF from '../types/Location';
-import { AppState } from '../../redux';
+import { AppState } from '../redux';
 import { useSelector } from 'react-redux';
 
 

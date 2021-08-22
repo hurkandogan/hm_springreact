@@ -6,12 +6,14 @@ import {
 } from 'react-icons/fa';
 import {
     BsCircle,
-    BsShield,
-    BsHouseDoor
+    BsHouseDoor,
+    BsPersonPlus,
+    BsLayers,
+    BsShieldLock
 } from 'react-icons/bs';
 import avatar from '../../sample_avatar.png';
 
-import { AppState } from '../../redux';
+import { AppState } from '../redux';
 import { useSelector } from 'react-redux';
 
 const Sidebar = (props: any) => {
@@ -22,7 +24,7 @@ const Sidebar = (props: any) => {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* <img src="#" className="brand-image img-circle elevation-3" style={{opacity: '0.8'}} /> */}
-            <p className="brand-text font-weight-light copyright-text">HugOS <small>0.0.0.3</small></p>
+            <p className="brand-text font-weight-light copyright-text">HugOS <small>0.0.0.4</small></p>
 
             <div className="sidebar">
                 <div className="user-panel mb-3 d-flex">
@@ -71,7 +73,7 @@ const Sidebar = (props: any) => {
                             <NavLink to={"/versicherungen"}
                                 className="nav-link"
                                 activeClassName="active">
-                                <BsShield />
+                                <BsShieldLock />
                                 <p>Versicherungen</p>
                             </NavLink>
                         </li>
@@ -93,7 +95,7 @@ const Sidebar = (props: any) => {
                             <NavLink to={"/locations"}
                                 className="nav-link"
                                 activeClassName="active">
-                                <BsShield />
+                                <BsLayers />
                                 <p>Locations</p>
                             </NavLink>
                         </li>
@@ -104,7 +106,7 @@ const Sidebar = (props: any) => {
                                     <NavLink to={"/register"}
                                         className="nav-link"
                                         activeClassName="active">
-                                        <BsShield />
+                                        <BsPersonPlus />
                                         <p>Create New User</p>
                                     </NavLink>
                                 </li>

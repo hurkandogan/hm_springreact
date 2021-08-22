@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import api from '../../connection/common_http';
+import api from '../connection/common_http';
 
-import { AppState } from '../../redux';
+import { AppState } from '../redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { showAlertAction } from "../../redux/actions/alertAction";
+import { showAlertAction } from "../redux/actions/alertAction";
 
 const ArtworkDetail = (props: any) => {
 
@@ -270,11 +270,11 @@ const ArtworkDetail = (props: any) => {
                 <div>
                     <div className="container">
                         <div className="row">
-                            <div className="col-2">
+                            <div className="col-3">
                                 <img src="https://picsum.photos/100/100"
                                     alt={props.selectedArtwork.artworkName} />
                             </div>
-                            <div className="col-3">
+                            <div className="col-4">
                                 <p>Folder Number: {props.selectedArtwork.folderNumber}</p>
                             </div>
                         </div>
