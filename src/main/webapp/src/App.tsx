@@ -45,9 +45,12 @@ function App() {
                     <Col>
                         {user.token && <TopNav />}
                         <div className="switch-wrapper">
-                            <Switch>
-                                <div className="content-wrapper">
-                                    <Route exact path={'/login'} component={Login} />
+                            <div className="content-wrapper">
+                                <Switch>
+
+                                    <Route exact path={'/login'}>
+                                        <Login />
+                                    </Route>
 
                                     <PrivateRoute exact path={"/"}>
                                         <Dashboard />
@@ -72,8 +75,9 @@ function App() {
                                     <PrivateRoute path={'/locations'}>
                                         <Location />
                                     </PrivateRoute>
-                                </div>
-                            </Switch>
+
+                                </Switch>
+                            </div>
                         </div>
                     </Col>
                     <AlertBox />

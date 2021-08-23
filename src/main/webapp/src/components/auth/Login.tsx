@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import AuthService from '../connection/auth.service';
 import {
-    useHistory,
-    useLocation
+    useHistory
 } from 'react-router-dom';
 
 const Login = (props) => {
@@ -11,9 +10,6 @@ const Login = (props) => {
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const history = useHistory();
-    const location = useLocation();
-
-    const from: any  = location.state || { from: { pathname: '/' } };
 
     const INITIAL_USER_DATA = {
         username: "",
@@ -21,7 +17,7 @@ const Login = (props) => {
     }
 
     const [userData, setUserData] = useState(INITIAL_USER_DATA);
-    
+
     const changeHandler = (event) => {
         const { name, value } = event.target;
         setUserData(prevValue => {
@@ -31,15 +27,15 @@ const Login = (props) => {
             }
         })
     }
-    
+
     const handleLogin = async (e) => {
         await e.preventDefault();
         setLoading(true);
         setButtonDisabled(true);
         await AuthService.signin(userData)
-            .then(() => {
-                history.replace(from);
-        })
+            .then(response => {
+                console.log(response);
+            })
             .catch(error => console.log(error));
         setUserData(INITIAL_USER_DATA);
         setLoading(false);
@@ -62,8 +58,8 @@ const Login = (props) => {
                         onChange={changeHandler}
                         autoComplete="disabled"
                     />
-                        <label htmlFor="username">Username</label>
-                    </div>
+                    <label htmlFor="username">Username</label>
+                </div>
                 <div className="form-floating">
                     <input type="password"
                         className="form-control"
@@ -85,7 +81,7 @@ const Login = (props) => {
                             <span className="sr-only"></span>
                         </div>
                     )}
-                    
+
                 </button>
             </form>
         </main>

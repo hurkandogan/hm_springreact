@@ -77,9 +77,9 @@ const Sidebar = (props: any) => {
                                 <p>Versicherungen</p>
                             </NavLink>
                         </li>
-                        {getLocations.filter(location => location.isForHouse).map(location => {
+                        {getLocations.filter(location => location.isForHouse).map((location, index) => {
                             return (
-                                <li className="nav-item" key={location.name}>
+                                <li className="nav-item" key={index}>
                                     <NavLink to={"/location/" + location.id}
                                         className="nav-link"
                                         activeClassName="active">
@@ -100,7 +100,7 @@ const Sidebar = (props: any) => {
                             </NavLink>
                         </li>
                         {user.role === "SUPERADMIN" &&
-                            <li> {/* TODO: hover is not working */}
+                            <div> {/* TODO: hover is not working */}
                                 <li className="nav-header">Admin Panel</li>
                                 <li className="nav-item">
                                     <NavLink to={"/register"}
@@ -110,7 +110,7 @@ const Sidebar = (props: any) => {
                                         <p>Create New User</p>
                                     </NavLink>
                                 </li>
-                            </li>
+                            </div>
                         }
                     </ul>
                 </nav>
