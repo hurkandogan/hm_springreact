@@ -45,6 +45,7 @@ const Dashboard = () => {
                     </div>
                     <section className="content">
                         <div className="container-fluid">
+
                             <div className="row">
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-success">
@@ -62,8 +63,10 @@ const Dashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <hr />
-                                <h3 className="mb-3">Verwaltungsaufwendungen:</h3>
+                            </div>
+                            <hr />
+                            <div className="row">
+                                <h3 className="mb-3">Verwaltungsaufwendungen: </h3>
                                 <div className="col-lg-3 col-6">
                                     <div className="small-box bg-light">
                                         <div className="inner">
@@ -83,10 +86,10 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </section>
-                </div>
+                </div >
             )
             }
-        </div>
+        </div >
 
     );
 };

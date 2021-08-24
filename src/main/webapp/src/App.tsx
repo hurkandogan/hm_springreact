@@ -11,20 +11,21 @@ import {
     Col
 } from "react-bootstrap";
 
+import { CSSTransition } from 'react-transition-group';
+
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import Login from "./components/auth/Login";
 import TopNav from "./components/shared/TopNav";
 import Sidebar from "./components/shared/Sidebar";
-import Dashboard from "./components/content/Dashboard";
-import Artwork from "./components/artwork/Artwork";
-import Location from "./components/location/Location";
-import Register from "./components/auth/Register";
 import AlertBox from "./components/alert/AlertBox";
 
 import { AppState } from './components/redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadUser } from './components/redux/actions/userAction';
 import { loadLocations } from './components/redux/actions/locationsAction';
+
+
+import routes from './routes';
 
 function App() {
 
@@ -47,35 +48,38 @@ function App() {
                         <div className="switch-wrapper">
                             <div className="content-wrapper">
                                 <Switch>
-
                                     <Route exact path={'/login'}>
-                                        <Login />
+                                        <CSSTransition
+                                            appear
+                                            in
+                                            timeout={300}
+                                            classNames="animation"
+                                            unmountOnExit
+                                        >
+                                            <div className="animation">
+                                                <Login />
+                                            </div>
+                                        </CSSTransition>
                                     </Route>
 
-                                    <PrivateRoute exact path={"/"}>
-                                        <Dashboard />
-                                    </PrivateRoute>
-
-                                    <PrivateRoute path={'/artwork'}>
-                                        <Artwork />
-                                    </PrivateRoute>
-
-                                    <PrivateRoute path={'/location/:locationId'}>
-                                        <Dashboard />
-                                    </PrivateRoute>
-
-                                    <PrivateRoute path={'/versicherungen'}>
-                                        <Dashboard />
-                                    </PrivateRoute>
-
-                                    <PrivateRoute path={'/register'}>
-                                        <Register />
-                                    </PrivateRoute>
-
-                                    <PrivateRoute path={'/locations'}>
-                                        <Location />
-                                    </PrivateRoute>
-
+                                    {routes.map((route: any, i: number) => {
+                                        return (
+                                            <PrivateRoute exact path={route.path} key={i}>
+                                                <CSSTransition
+                                                    appear
+                                                    in
+                                                    timeout={300}
+                                                    classNames="animation"
+                                                    unmountOnExit
+                                                >
+                                                    <div className="animation">
+                                                        <route.Component />
+                                                    </div>
+                                                </CSSTransition>
+                                            </PrivateRoute>
+                                        )
+                                    })
+                                    }
                                 </Switch>
                             </div>
                         </div>

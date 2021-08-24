@@ -16,7 +16,7 @@ const AlertBox = () => {
     }
 
     return (
-        <div className="alert-wrapper">
+        <div className="alert-wrapper fade-in">
             <Toast onClose={handleClose} show={alert.show} delay={10000} autohide>
                 <Toast.Header>
                     <img
@@ -25,7 +25,7 @@ const AlertBox = () => {
                         alt=""
                     />
                     <strong className="me-auto">{alert.alertType}</strong>
-                    <small>10 seconds</small>
+                    <small>now</small>
                 </Toast.Header>
                 <Toast.Body className="{alert.alertType}">{alert.msg}</Toast.Body>
             </Toast>

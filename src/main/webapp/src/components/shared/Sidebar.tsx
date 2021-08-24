@@ -24,7 +24,7 @@ const Sidebar = (props: any) => {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             {/* <img src="#" className="brand-image img-circle elevation-3" style={{opacity: '0.8'}} /> */}
-            <p className="brand-text font-weight-light copyright-text">HugOS <small>0.0.0.4</small></p>
+            <p className="brand-text font-weight-light copyright-text">HugOS <small>0.0.0.6</small></p>
 
             <div className="sidebar">
                 <div className="user-panel mb-3 d-flex">
